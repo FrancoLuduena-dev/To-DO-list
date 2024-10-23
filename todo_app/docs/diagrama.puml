@@ -1,33 +1,64 @@
 @startuml diagrama
 
 abstract class toDoList{
-
+    -listaTareas[]: tarea;
+    -listaTareasCompletadas[]: tarea;
+    -listaTareasPendientes[]: tarea;
+    +getters_setters
 }
 
-class administrarTareas extends toDoList{
-
+class tarea extends toDoList{
+    -titulo: string;
+    -descripcion: string;
+    -fechaVencimiento: number;
+    -prioridad: char;
+    -etiqueta: string;
+    -completado: boolean;
+    -porcentajeAvance: number;
+    +setters()
+    +getters()
 }
 
-class priorizacion{
-
+class categorizado {
+    -categoria: string;
+    -listaTareasXCategoria[<tarea><categoria>]: tarea;
+    +setCategoria();
 }
 
-class definirFecha{
-
+class administrarTareas {
+    +addTarea();
+    +borrarTarea();
 }
 
-class categorizacionEtiquetado{
-
+interface busqueda{
+    +buscarPorTitulo(): tarea;
+    +buscarPorFechaVencimiento(): tarea;
 }
 
-class progresion{
-
+interface ordenamiento{
+    -listadoOrdenado[]: tarea;
+    +ordenarPorTitulo(): void;
+    +ordenarPorFecha(): void;
+    +ordenarPorPrioridad(): void;
 }
 
-class busqueda{
-
+interface calculadoraEstadistica{
+    -listadoTasaFinalizacion[]: number;
+    -listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
+    +calcularTasa(): number;
+    +calcularTiempoDedicado(): number;
 }
 
+interface persistencia{
+    logica para que persistan los datos del programa;
+}
+
+tarea *.r. categorizado
+tarea *.. administrarTareas
+tarea ..> calculadoraEstadistica
+tarea ..> busqueda
+tarea .l.> ordenamiento
+toDoList ..> persistencia
 
 
 @enduml
