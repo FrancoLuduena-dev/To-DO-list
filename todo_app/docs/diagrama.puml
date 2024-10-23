@@ -1,0 +1,33 @@
+@startuml diagrama
+
+abstract class toDoList{
+
+}
+
+class administrarTareas extends toDoList{
+
+}
+
+class priorizacion{
+
+}
+
+class definirFecha{
+
+}
+
+class categorizacionEtiquetado{
+
+}
+
+class progresion{
+
+}
+
+class busqueda{
+
+}
+
+
+
+@enduml
