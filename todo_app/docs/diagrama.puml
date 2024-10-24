@@ -1,28 +1,27 @@
 @startuml diagrama
 
-abstract class toDoList{
+class toDoList{
     -listaTareas[]: tarea;
     -listaTareasCompletadas[]: tarea;
     -listaTareasPendientes[]: tarea;
     +getters_setters
 }
 
-class tarea extends toDoList{
+class tarea{
     -titulo: string;
     -descripcion: string;
-    -fechaVencimiento: number;
-    -prioridad: char;
-    -etiqueta: string;
+    -fechaVencimiento: date;
+    ' lo cambie a "date" que es un tipo de objeto de javascript que funciona en typescript y deja poner fechas de una.
+    -fechaCreacion: date;
+    ' la agrego porque para hacer la estadistica de cuanto tiempo se tardo, la forma mas simple que se me ocurre es poner la fecha de creacion, y cuando lo pasas a completado, comparar con la fecha de finalizacion y calcular los dias transcurridos
+    -prioridad: string;  
     -completado: boolean;
     -porcentajeAvance: number;
+    -categoria: string;
+    -listaTareasXCategoria[<tarea>][<mapa>]: tarea;
+    -etiqueta: string;
     +setters()
     +getters()
-}
-
-class categorizado {
-    -categoria: string;
-    -listaTareasXCategoria[<tarea><categoria>]: tarea;
-    +setCategoria();
 }
 
 class administrarTareas {
@@ -33,6 +32,7 @@ class administrarTareas {
 interface busqueda{
     +buscarPorTitulo(): tarea;
     +buscarPorFechaVencimiento(): tarea;
+    +buscarPorEtiquetas(): tarea;
 }
 
 interface ordenamiento{
@@ -43,22 +43,40 @@ interface ordenamiento{
 }
 
 interface calculadoraEstadistica{
-    -listadoTasaFinalizacion[]: number;
+    -TasaFinalizacion: number;
+    -numeroTareasCompletadas: number;
+    -numeroTareasTotales: number;
+    'le saque que sea coleccion, es una tasa (tareasFinalizadas/tareasTotales)
     -listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
+    'esto serviria si hacemos algunas estadisticas que sean algo asi como "promedio de tiempo para resolucion de tareas", o "tiempo dedicado a X categoria / etiqueta", sino yo pondria
+    -TiempoDedicadoATareas: number;
+    'este simplemente sumaria el tiempo desde la creacion de la tarea hasta ahora. Tambien se puede separar en tiempo dedicado a teareas completadas y tiempo dedicado a tareas no completadas
     +calcularTasa(): number;
     +calcularTiempoDedicado(): number;
 }
 
 interface persistencia{
-    logica para que persistan los datos del programa;
+    + guardarJSON();
+    + guardarCSV();
+    + leer();
+    'el tp pide guardar en JSON y texto plano, yo diria que usemos CSV para texto plano (valores separados por comas)
 }
 
-tarea *.r. categorizado
-tarea *.. administrarTareas
-tarea ..> calculadoraEstadistica
-tarea ..> busqueda
-tarea .l.> ordenamiento
-toDoList ..> persistencia
+toDoList ..> administrarTareas
+administrarTareas ..> tarea
+toDoList ..> calculadoraEstadistica
+toDoList ..> busqueda
+toDoList .l.> ordenamiento
+toDoList *.d. tarea
+toDoList .l.> persistencia
+
+note right of tarea 
+"categorias como enum"
+endnote
+
+note left of tarea
+"prioridades como enum"
+endnote
 
 
 @enduml
