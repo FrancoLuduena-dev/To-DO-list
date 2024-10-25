@@ -1,13 +1,15 @@
-@startuml diagrama
+@startuml diagrama clases
+title TODO list
 
-class toDoList{
+class toDoList #LightCyan;header:444{
     -listaTareas[]: tarea;
     -listaTareasCompletadas[]: tarea;
     -listaTareasPendientes[]: tarea;
     +getters_setters
 }
 
-class tarea{
+
+class tarea #LightCyan;header:444{
     -titulo: string;
     -descripcion: string;
     -fechaVencimiento: date;
@@ -24,25 +26,36 @@ class tarea{
     +getters()
 }
 
-class administrarTareas {
-    +addTarea();
-    +borrarTarea();
+class administrarTareas #LightCyan;header:444{
+    +addTarea(): void;
+    +borrarTarea(): void;
+    'agrego los metodos para modificar las tareas. Estos metodos deberian usar el setter, y aparte hacer que se guarde los cambios al JSON.
+    +modificarTitulo(): void;
+    +modificarDescripcion(): void;
+    +modificarFechaVencimiento(): void;
+    +modificarPrioridad(): void;
+    +modificarPorcentajeAvance(): void;
+    +modificarEtiquetas(): void;
+    'ver una forma de unificar estos metodos de modificacion
+    +marcarComoCompletado(): void;
+    'este metodo no estoy seguro si deberia existir o simplemente que cuando pongan el porcentaje de avance en 100, el atributo completado cambie a true.
 }
 
-interface busqueda{
+
+interface busqueda #Thistle;header:444{
     +buscarPorTitulo(): tarea;
     +buscarPorFechaVencimiento(): tarea;
     +buscarPorEtiquetas(): tarea;
 }
 
-interface ordenamiento{
+interface ordenamiento #Thistle;header:444{
     -listadoOrdenado[]: tarea;
     +ordenarPorTitulo(): void;
     +ordenarPorFecha(): void;
     +ordenarPorPrioridad(): void;
 }
 
-interface calculadoraEstadistica{
+interface calculadoraEstadistica #Thistle;header:444{
     -TasaFinalizacion: number;
     -numeroTareasCompletadas: number;
     -numeroTareasTotales: number;
@@ -55,28 +68,43 @@ interface calculadoraEstadistica{
     +calcularTiempoDedicado(): number;
 }
 
-interface persistencia{
+interface persistencia #Thistle;header:444{
     + guardarJSON();
-    + guardarCSV();
     + leer();
-    'el tp pide guardar en JSON y texto plano, yo diria que usemos CSV para texto plano (valores separados por comas)
+    'borre guardar texto plano por que era JSON al final.
 }
 
-toDoList ..> administrarTareas
-administrarTareas ..> tarea
+'relaciones
+skinparam ranksep 100
+'cambia el largo de las flechas
+skinparam nodesep 100
+'cambia la distancia entre los cuadrados
+
+toDoList .l.> administrarTareas
+administrarTareas .l.> tarea
+toDoList *.. tarea
 toDoList ..> calculadoraEstadistica
 toDoList ..> busqueda
-toDoList .l.> ordenamiento
-toDoList *.d. tarea
-toDoList .l.> persistencia
+toDoList ..> ordenamiento
+toDoList ..> persistencia
 
-note right of tarea 
-"categorias como enum"
+
+'notas
+note left of tarea::prioridad
+    "enum: alta, media, baja"
 endnote
 
-note left of tarea
-"prioridades como enum"
+note left of tarea::categoria
+    "enum: trabajo, personal, recados, etc"
 endnote
 
+
+
+
+'diseño
+skinparam roundcorner 20
+'cambia las esquinas de las clases para hacerlas mas redondeadas
+skinparam classFontColor automatic
+'cambia el color de fuente de todas las clases asi se ve en blanco sobre el fondo oscuro.
 
 @enduml
