@@ -1,7 +1,7 @@
 import { category, priority } from "./enums";
 
 
-export default class Task {
+export default class tarea {
     private title: string;
     private description:string;
     private expiration_date:Date;
