@@ -1,99 +1,101 @@
-import { category, priority } from "./enums";
+
+import { categoria, prioridad } from "./enums";
 
 
-export default class Task {
-    private title: string;
-    private description:string;
-    private expiration_date:Date;
-    private creation_date:Date = new Date();
-    private priority:priority;
-    private completed: boolean = false;
-    private progress: number = 0;
-    private category: category;
-    private labels: string[] = [] 
+export default class Tarea {
+    private titulo: string;
+    private descripcion:string;
+    private fechaVencimiento:Date;
+    private fechaCreacion:Date = new Date();
+    private prioridad:prioridad;
+    private completado: boolean = false;
+    private porcentajeAvance: number = 0;
+    private categoria: categoria;
+    private etiqueta: string[] = [] 
+
     
     constructor(
-        title: string, 
-        description: string, 
-        expiration_date: Date, 
-        priority: priority, 
-        category: category
+        titulo: string, 
+        descripcion: string, 
+        fechaVencimiento: Date, 
+        prioridad: prioridad, 
+        categoria: categoria
     ) {
-        this.title = title;
-        this.description = description;
-        this.expiration_date = expiration_date;
-        this.priority = priority;
-        this.category = category;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.prioridad = prioridad;
+        this.categoria = categoria;
     }
 
     // Getters
-    public get_title(): string {
-        return this.title;
+    public getTitulo(): string {
+        return this.titulo;
     }
 
-    public get_description(): string {
-        return this.description;
+    public getDescripcion(): string {
+        return this.descripcion;
     }
 
-    public get_expirationDate(): Date {
-        return this.expiration_date;
+    public getFechaVencimiento(): Date {
+        return this.fechaVencimiento;
     }
 
-    public get_creation_date(): Date {
-        return this.creation_date;
+    public getFechaCreacion(): Date {
+        return this.fechaCreacion;
     }
 
-    public get_priority(): priority {
-        return this.priority;
+    public getPrioridad(): prioridad {
+        return this.prioridad;
     }
 
-    public get_completed(): boolean {
-        return this.completed;
+    public getCompletado(): boolean {
+        return this.completado;
     }
 
-    public get_progress(): number {
-        return this.progress;
+    public getPorcentajeAvance(): number {
+        return this.porcentajeAvance;
     }
 
-    public get_category(): category {
-        return this.category;
+    public getCategoria(): categoria {
+        return this.categoria;
     }
 
-    public get_labels(): string[] {
-        return this.labels;
+    public getEtiqueta(): string[] {
+        return this.etiqueta;
     }
 
     // Setters
-    public set_title(title: string): void {
-        this.title = title;
+    public setTitulo(titulo: string): void {
+        this.titulo = titulo;
     }
 
-    public set_description(description: string): void {
-        this.description = description;
+    public setDescripcion(descripcion: string): void {
+        this.descripcion = descripcion;
     }
 
-    public set_expiration_date(expiration_date: Date): void {
-        this.expiration_date = expiration_date;
+    public setFechaVencimiento(fechaVencimiento: Date): void {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
-    public set_priority(priority: priority): void {
-        this.priority = priority;
+    public setPrioridad(prioridad: prioridad): void {
+        this.prioridad = prioridad;
     }
 
-    public set_completed(completed: boolean): void {
-        this.completed = completed;
+    public setCompletado(completado: boolean): void {
+        this.completado = completado;
     }
 
-    public set_progress(progress: number): void {
-        this.progress = progress;
+    public setPorcentajeAvance(porcentajeAvance: number): void {
+        this.porcentajeAvance = porcentajeAvance;
     }
 
-    public set_category(category: category): void {
-        this.category = category;
+    public setCategoria(categoria: categoria): void {
+        this.categoria = categoria;
     }
 
-    public set_labels(labels: string[]): void {
-        this.labels = labels;
+    public setEtiqueta(etiqueta: string[]): void {
+        this.etiqueta = etiqueta;
     }
     
 }

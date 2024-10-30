@@ -1,14 +1,14 @@
-export enum priority {
-    low = 0,
-    mid = 1,
-    high = 2
+export enum prioridad {
+    baja = 0,
+    media = 1,
+    alta = 2
 }
 
-export enum category {
-    'Work',
+export enum categoria {
+    'Trabajo',
     'Personal',
-    'Family',
-    'college'
+    'Familia',
+    'Estudio'
 }
 
 
