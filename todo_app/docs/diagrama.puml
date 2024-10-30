@@ -1,82 +1,111 @@
-@startuml diagrama
+@startuml diagrama clases
+title TODO list
 
-class toDoList{
-    -listaTareas[]: tarea;
-    -listaTareasCompletadas[]: tarea;
-    -listaTareasPendientes[]: tarea;
-    +getters_setters
+class toDoLista #LightCyan;header:444{
+    - {static} listaTareas[]: tarea;
+    - listaTareasCompletadas[]: tarea;
+    - listaTareasPendientes[]: tarea;
+    + getters_setters
+    + {static} agregarTareaALista(): void;
+    + {static} getTareaDeLista(): Tarea;
+    + {static} getTitulosDeTareas(): string[];
 }
 
-class tarea{
-    -titulo: string;
-    -descripcion: string;
-    -fechaVencimiento: date;
+
+class tarea #LightCyan;header:444{
+    - titulo: string;
+    - descripcion: string;
+    - fechaVencimiento: date;
     ' lo cambie a "date" que es un tipo de objeto de javascript que funciona en typescript y deja poner fechas de una.
-    -fechaCreacion: date;
+    - fechaCreacion: date;
     ' la agrego porque para hacer la estadistica de cuanto tiempo se tardo, la forma mas simple que se me ocurre es poner la fecha de creacion, y cuando lo pasas a completado, comparar con la fecha de finalizacion y calcular los dias transcurridos
-    -prioridad: string;  
-    -completado: boolean;
-    -porcentajeAvance: number;
-    -categoria: string;
-    -listaTareasXCategoria[<tarea>][<mapa>]: tarea;
-    -etiqueta: string;
-    +setters()
-    +getters()
+    - prioridad: string;
+    - completado: boolean;
+    - porcentajeAvance: number;
+    - categoria: string;
+    - listaTareasXCategoria[<tarea>][<mapa>]: tarea;
+    - etiqueta: string;
+    + setters()
+    + getters()
 }
 
-class administrarTareas {
-    +addTarea();
-    +borrarTarea();
+class administrarTareas #LightCyan;header:444{
+    + agregarTarea(): void;
+    + borrarTarea(): void;
+    'agrego los metodos para modificar las tareas. Estos metodos deberian usar el setter, y aparte hacer que se guarde los cambios al JSON.
+    + modificarTitulo(): void;
+    + modificarDescripcion(): void;
+    + modificarFechaVencimiento(): void;
+    + modificarPrioridad(): void;
+    + modificarPorcentajeAvance(): void;
+    + modificarEtiquetas(): void;
+    'ver una forma de unificar estos metodos de modificacion
+    + marcarComoCompletado(): void;
+    'este metodo no estoy seguro si deberia existir o simplemente que cuando pongan el porcentaje de avance en 100, el atributo completado cambie a true.
 }
 
-interface busqueda{
-    +buscarPorTitulo(): tarea;
-    +buscarPorFechaVencimiento(): tarea;
-    +buscarPorEtiquetas(): tarea;
+
+interface busqueda #Thistle;header:444{
+    + buscarPorTitulo(): tarea;
+    + buscarPorFechaVencimiento(): tarea;
+    + buscarPorEtiquetas(): tarea;
 }
 
-interface ordenamiento{
-    -listadoOrdenado[]: tarea;
-    +ordenarPorTitulo(): void;
-    +ordenarPorFecha(): void;
-    +ordenarPorPrioridad(): void;
+interface ordenamiento #Thistle;header:444{
+    - listadoOrdenado[]: tarea;
+    + ordenarPorTitulo(): void;
+    + ordenarPorFecha(): void;
+    + ordenarPorPrioridad(): void;
 }
 
-interface calculadoraEstadistica{
-    -TasaFinalizacion: number;
-    -numeroTareasCompletadas: number;
-    -numeroTareasTotales: number;
+interface calculadoraEstadistica #Thistle;header:444{
+    - TasaFinalizacion: number;
+    - numeroTareasCompletadas: number;
+    - numeroTareasTotales: number;
     'le saque que sea coleccion, es una tasa (tareasFinalizadas/tareasTotales)
-    -listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
+    - listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
     'esto serviria si hacemos algunas estadisticas que sean algo asi como "promedio de tiempo para resolucion de tareas", o "tiempo dedicado a X categoria / etiqueta", sino yo pondria
-    -TiempoDedicadoATareas: number;
+    - TiempoDedicadoATareas: number;
     'este simplemente sumaria el tiempo desde la creacion de la tarea hasta ahora. Tambien se puede separar en tiempo dedicado a teareas completadas y tiempo dedicado a tareas no completadas
-    +calcularTasa(): number;
-    +calcularTiempoDedicado(): number;
+    + calcularTasa(): number;
+    + calcularTiempoDedicado(): number;
 }
 
-interface persistencia{
+interface persistencia #Thistle;header:444{
     + guardarJSON();
-    + guardarCSV();
     + leer();
-    'el tp pide guardar en JSON y texto plano, yo diria que usemos CSV para texto plano (valores separados por comas)
+    'borre guardar texto plano por que era JSON al final.
 }
 
-toDoList ..> administrarTareas
-administrarTareas ..> tarea
-toDoList ..> calculadoraEstadistica
-toDoList ..> busqueda
-toDoList .l.> ordenamiento
-toDoList *.d. tarea
-toDoList .l.> persistencia
+'relaciones
+skinparam ranksep 100
+'cambia el largo de las flechas
+skinparam nodesep 100
+'cambia la distancia entre los cuadrados
 
-note right of tarea 
-"categorias como enum"
+toDoLista .l.> administrarTareas
+administrarTareas .l.> tarea
+toDoLista *.. tarea
+toDoLista ..> calculadoraEstadistica
+toDoLista ..> busqueda
+toDoLista ..> ordenamiento
+toDoLista ..> persistencia
+
+
+'notas
+note left of tarea::prioridad
+"enum: alta, media, baja"
 endnote
 
-note left of tarea
-"prioridades como enum"
+note left of tarea::categoria
+"enum: trabajo, personal, recados, etc"
 endnote
 
+
+'diseño
+skinparam roundcorner 20
+'cambia las esquinas de las clases para hacerlas mas redondeadas
+skinparam classFontColor automatic
+'cambia el color de fuente de todas las clases asi se ve en blanco sobre el fondo oscuro.
 
 @enduml
