@@ -1,3 +1,4 @@
+
 import { categoria, prioridad } from "./enums";
 
 
@@ -11,6 +12,7 @@ export default class Tarea {
     private porcentajeAvance: number = 0;
     private categoria: categoria;
     private etiqueta: string[] = [] 
+
     
     constructor(
         titulo: string, 
