@@ -1,18 +1,19 @@
 @startuml diagrama clases
 title TODO list
 
-class toDoLista #LightCyan;header:444{
-    - {static} listaTareas[]: tarea;
+abstract class toDoLista #LightCyan;header:444{
+    - {static} listaTareas: Map<string, tarea> ;
     - listaTareasCompletadas[]: tarea;
     - listaTareasPendientes[]: tarea;
-    + getters_setters
     + {static} agregarTareaALista(): void;
     + {static} getTareaDeLista(): Tarea;
     + {static} getTitulosDeTareas(): string[];
+    + {static} borrarTareaDeLista(): void;
+    + {static} modificares de parametros()
 }
 
 
-class tarea #LightCyan;header:444{
+class tarea #TECHNOLOGY;header:444{
     - titulo: string;
     - descripcion: string;
     - fechaVencimiento: date;
@@ -29,18 +30,18 @@ class tarea #LightCyan;header:444{
     + getters()
 }
 
-class administrarTareas #LightCyan;header:444{
-    + agregarTarea(): void;
-    + borrarTarea(): void;
+abstract class administrarTareas #LightCyan;header:444{
+    + {static} agregarTarea(): void;
+    + {static} borrarTarea(): void;
     'agrego los metodos para modificar las tareas. Estos metodos deberian usar el setter, y aparte hacer que se guarde los cambios al JSON.
-    + modificarTitulo(): void;
-    + modificarDescripcion(): void;
-    + modificarFechaVencimiento(): void;
-    + modificarPrioridad(): void;
-    + modificarPorcentajeAvance(): void;
-    + modificarEtiquetas(): void;
+    + {static} modificarTitulo(): void;
+    + {static} modificarDescripcion(): void;
+    + {static} modificarFechaVencimiento(): void;
+    + {static} modificarPrioridad(): void;
+    + {static} modificarPorcentajeAvance(): void;
+    + {static} modificarEtiquetas(): void;
     'ver una forma de unificar estos metodos de modificacion
-    + marcarComoCompletado(): void;
+    + {static} marcarComoCompletado(): void;
     'este metodo no estoy seguro si deberia existir o simplemente que cuando pongan el porcentaje de avance en 100, el atributo completado cambie a true.
 }
 
@@ -103,6 +104,14 @@ endnote
 
 
 'diseño
+/'
+clase: #TECHNOLOGY
+clase: abstracta #LightCyan
+interfaz: #Thistle
+
+'/
+
+
 skinparam roundcorner 20
 'cambia las esquinas de las clases para hacerlas mas redondeadas
 skinparam classFontColor automatic
