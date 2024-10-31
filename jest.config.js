@@ -8,7 +8,9 @@ module.exports = {
   coverageReporters: ["clover", "json", "lcov", ["text", { "skipFull": true }]],
   preset: "ts-jest",
   testEnvironment: "node",
-  testMatch: ["<rootDir>/tests/**/*.test.ts"],
+  testMatch: ["<rootDir>/tests/*.test.ts",
+              "<rootDir>/todo_app/tests/*.test.ts"
+  ],
   testPathIgnorePatterns: [
     "node_modules",
     "tests/data.ts",
