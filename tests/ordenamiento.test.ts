@@ -56,7 +56,7 @@ describe('test clase ordenamiento', ()=> {
 
     })
 
-    test('deberia ordenar por titulo > a <', ()=> {
+    test('deberia ordenar por titulo', ()=> {
 
         const tarea1 = mock<Tarea>();
         const tarea2 = mock<Tarea>();
@@ -71,7 +71,7 @@ describe('test clase ordenamiento', ()=> {
 
         const tareas = [tarea1, tarea2, tarea3, tarea4];
         
-        const tareas_ordenadas_false = ordenamiento.ordenarPorTitulo(tareas, true)
+        const tareas_ordenadas_false = ordenamiento.ordenarPorTitulo(tareas)
         //const tareas_ordenadas_false = tareas.sort((a, b) => a.getTitulo().localeCompare(b.getTitulo()));
 
 
@@ -122,7 +122,7 @@ describe('test clase ordenamiento', ()=> {
 
         const tareas = [tarea1, tarea2, tarea3];
         
-        const tareas_ordenadas_true = ordenamiento.ordenarPorPrioridad(tareas, true)
+        const tareas_ordenadas_true = ordenamiento.ordenarPorPrioridad(tareas, false)
         //const tareas_ordenadas_false = tareas.sort((a, b) => a.getTitulo().localeCompare(b.getTitulo()));
 
 
