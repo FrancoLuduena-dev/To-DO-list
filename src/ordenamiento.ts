@@ -1,9 +1,11 @@
-abstract class ordenamiento{
+import tarea from "./tarea";
+
+export  class Ordenamiento{
 
     // este flag booleano decide si el orden se hace de mayor a menor o menor a mayor
     // true == menor a mayor
     // flase == mayor a menor
-    public static ordenarPorFecha(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
+    public  ordenarPorFecha(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
 
     if (b === true) {
         // el metodo sort compara el primer valor con el segundo, aun no entendi muy bien el funcionamiento exactamente de este metodo nativo de javascript, pero ordena de menor a mayor y en el segundo caso de mayor a menor
@@ -35,7 +37,7 @@ abstract class ordenamiento{
         }
     }
 
-    public static ordenarPorTitulo(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
+    public  ordenarPorTitulo(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
         let i: number = 0;
         let flag: boolean = false;
 
@@ -74,7 +76,7 @@ abstract class ordenamiento{
     }
 
     // falta implementar el orden por priodidad, hay que ver como se va a implementar en si el sistema de prioridad de cada tarea
-    public static ordenarPorPrioridad(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
+    public ordenarPorPrioridad(listaDesordenada: Array<tarea>, b: boolean): Array<tarea> {
 
         return listaDesordenada;
     }
