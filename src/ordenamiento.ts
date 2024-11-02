@@ -1,6 +1,6 @@
 import tarea from "./tarea";
 
-class ordenamiento {
+export class Ordenamiento {
 
     // este flag booleano decide si el orden se hace de mayor a menor o menor a mayor
     // true == menor a mayor
