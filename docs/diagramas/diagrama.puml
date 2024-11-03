@@ -1,0 +1,114 @@
+@startuml diagrama clases
+title TO DO list
+
+
+class toDoLista #TECHNOLOGY;header:444{
+    - listaTareas[]: tarea[] ;
+    - listaTareasCompletadas[]: tarea;
+    - listaTareasPendientes[]: tarea;
+    + agregarTareaALista(): void;
+    + getTareaDeLista(): Tarea;
+    + getTitulosDeTareas(): string[];
+    + borrarTareaDeLista(): void;
+    + modificares de parametros()
+}
+
+
+class tarea #TECHNOLOGY;header:444{
+    - titulo: string;
+    - descripcion: string;
+    - fechaVencimiento: date;
+    - fechaCreacion: date;
+    ' Para hacer la estadistica de cuanto tiempo se tardo, comparando con fecha actual
+    - prioridad: string;
+    - completado: boolean;
+    - porcentajeAvance: number;
+    - categoria: string;
+    - etiqueta: string;
+    + setters()
+    + getters()
+    + agregarTarea(): void;
+    + borrarTarea(): void;
+}
+
+enum prioridad #LightSalmon;header:444{
+    baja, 
+    media,
+    alta
+}
+
+enum categorias #LightSalmon;header:444{
+    trabajo, 
+    personal, 
+    familia, 
+    estudio
+}
+
+class busqueda #TECHNOLOGY;header:444{
+    + buscarPorTitulo(): tarea;
+    + buscarPorFechaVencimiento(): tarea;
+    + buscarPorEtiquetas(): tarea;
+}
+
+class ordenamiento #TECHNOLOGY;header:444{
+    - listadoOrdenado[]: tarea;
+    + ordenarPorTitulo(): void;
+    + ordenarPorFecha(): void;
+    + ordenarPorPrioridad(): void;
+}
+
+class calculadoraEstadistica #TECHNOLOGY;header:444{
+    - TasaFinalizacion: number;
+    - numeroTareasCompletadas: number;
+    - numeroTareasTotales: number;
+    - listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
+    'esto serviria si hacemos algunas estadisticas que sean algo asi como "promedio de tiempo para resolucion de tareas", o "tiempo dedicado a X categoria / etiqueta", sino yo pondria
+    - TiempoDedicadoATareas: number;
+    'este simplemente sumaria el tiempo desde la creacion de la tarea hasta ahora. Tambien se puede separar en tiempo dedicado a teareas completadas y tiempo dedicado a tareas no completadas
+    + calcularTasa(): number;
+    + calcularTiempoDedicado(): number;
+}
+
+class persistencia #TECHNOLOGY;header:444{
+    + guardarJSON();
+    + leer();
+}
+
+exception tareaInexistenteError #LightCoral;header:444{
+    + getMessage()
+}
+
+'relaciones
+skinparam ranksep 100
+'cambia el largo de las flechas
+skinparam nodesep 100
+'cambia la distancia entre los cuadrados
+prioridad .r.> tarea::prioridad
+categorias .l.> tarea::categoria
+tarea ..* toDoLista 
+toDoLista::borrarTareaDeLista <.l. tareaInexistenteError 
+toDoLista .d.> calculadoraEstadistica
+toDoLista .d.> busqueda
+toDoLista .d.> ordenamiento
+toDoLista .d.> persistencia
+
+
+
+'notas
+
+'diseño
+/'
+clase: #TECHNOLOGY;header:444
+clase: abstracta #LightCyan;header:444
+interfaz: #Thistle;header:444
+enums: #LightSalmon;header:444
+excepciones: #LightCoral;header:444
+'/
+skinparam roundcorner 20
+'cambia las esquinas de las clases para hacerlas mas redondeadas
+skinparam classFontColor automatic
+'cambia el color de fuente de todas las clases asi se ve en blanco sobre el fondo oscuro.
+
+
+
+@enduml
