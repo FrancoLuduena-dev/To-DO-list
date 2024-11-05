@@ -1,25 +1,17 @@
 @startuml diagrama clases
 title TO DO list
 
-
-class toDoLista #TECHNOLOGY;header:444{
-    - listaTareas[]: tarea[] ;
-    - listaTareasCompletadas[]: tarea;
-    - listaTareasPendientes[]: tarea;
-    + agregarTareaALista(): void;
-    + getTareaDeLista(): Tarea;
-    + getTitulosDeTareas(): string[];
-    + borrarTareaDeLista(): void;
-    + modificares de parametros()
+interface Builder #Thistle;header:444{
+    +setTitulo(titulo: string) ;
+    +setDescripcion(descripcion: string) ;
 }
 
 
-class tarea #TECHNOLOGY;header:444{
+class Tarea #TECHNOLOGY;header:444{
     - titulo: string;
     - descripcion: string;
     - fechaVencimiento: date;
     - fechaCreacion: date;
-    ' Para hacer la estadistica de cuanto tiempo se tardo, comparando con fecha actual
     - prioridad: string;
     - completado: boolean;
     - porcentajeAvance: number;
@@ -29,6 +21,27 @@ class tarea #TECHNOLOGY;header:444{
     + getters()
     + agregarTarea(): void;
     + borrarTarea(): void;
+}
+
+class ConstructorTarea #TECHNOLOGY;header:444 implements Builder {
+    +reset(): void ;
+    +setTitulo(titulo: string) ;
+    +setDescripcion(descripcion: string) ;
+    +setFechaVencimiento(fechaVencimiento: Date) ;
+    +setPrioridad(prioridad: prioridad) ;
+    +setCategoria(categoria: categoria) ;
+    +setEtiqueta(etiqueta: string) ;
+    +construirTarea()
+}
+
+class Director #TECHNOLOGY;header:444{
+    -builder: builder ;
+    +constructor()
+    +setBuilder(): void ;
+    +construirTareaBasica() 
+    'este solo pediria el setTitulo y setDescripcion
+    +construirTareaCompleta()
+    'Este tendria los sets de cada paso
 }
 
 enum prioridad #LightSalmon;header:444{
@@ -44,20 +57,32 @@ enum categorias #LightSalmon;header:444{
     estudio
 }
 
-class busqueda #TECHNOLOGY;header:444{
+
+class ToDoLista #TECHNOLOGY;header:444{
+    - listaTareas[]: tarea[] ;
+    - listaTareasCompletadas[]: tarea;
+    - listaTareasPendientes[]: tarea;
+    + agregarTareaALista(): void;
+    + getTareaDeLista(): Tarea;
+    + getTitulosDeTareas(): string[];
+    + borrarTareaDeLista(): void;
+    + modificares de parametros()
+}
+
+class Busqueda #TECHNOLOGY;header:444{
     + buscarPorTitulo(): tarea;
     + buscarPorFechaVencimiento(): tarea;
     + buscarPorEtiquetas(): tarea;
 }
 
-class ordenamiento #TECHNOLOGY;header:444{
+class Ordenamiento #TECHNOLOGY;header:444{
     - listadoOrdenado[]: tarea;
     + ordenarPorTitulo(): void;
     + ordenarPorFecha(): void;
     + ordenarPorPrioridad(): void;
 }
 
-class calculadoraEstadistica #TECHNOLOGY;header:444{
+class CalculadoraEstadistica #TECHNOLOGY;header:444{
     - TasaFinalizacion: number;
     - numeroTareasCompletadas: number;
     - numeroTareasTotales: number;
@@ -69,7 +94,7 @@ class calculadoraEstadistica #TECHNOLOGY;header:444{
     + calcularTiempoDedicado(): number;
 }
 
-class persistencia #TECHNOLOGY;header:444{
+class Persistencia #TECHNOLOGY;header:444{
     + guardarJSON();
     + leer();
 }
@@ -83,14 +108,16 @@ skinparam ranksep 100
 'cambia el largo de las flechas
 skinparam nodesep 100
 'cambia la distancia entre los cuadrados
-prioridad .r.> tarea::prioridad
-categorias .l.> tarea::categoria
-tarea ..* toDoLista 
-toDoLista::borrarTareaDeLista <.l. tareaInexistenteError 
-toDoLista .d.> calculadoraEstadistica
-toDoLista .d.> busqueda
-toDoLista .d.> ordenamiento
-toDoLista .d.> persistencia
+Tarea .u.> ConstructorTarea
+Director ..> Builder
+prioridad .r.> Tarea::prioridad
+categorias .l.> Tarea::categoria
+Tarea ..* ToDoLista 
+ToDoLista::borrarTareaDeLista <.l. tareaInexistenteError 
+ToDoLista .d.> CalculadoraEstadistica
+ToDoLista .d.> Busqueda
+ToDoLista .d.> Ordenamiento
+ToDoLista .d.> Persistencia
 
 
 

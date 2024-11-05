@@ -1,0 +1,46 @@
+@startuml prueba builder
+interface Builder{
+    +setTitulo(titulo: string) ;
+    +setDescripcion(descripcion: string) ;
+}
+
+class ConstructorTarea implements builder{
+    +reset(): void ;
+    +setTitulo(titulo: string) ;
+    +setDescripcion(descripcion: string) ;
+    +setFechaVencimiento(fechaVencimiento: Date) ;
+    +setPrioridad(prioridad: prioridad) ;
+    +setCategoria(categoria: categoria) ;
+    +setEtiqueta(etiqueta: string) ;
+    +construirTarea()
+}
+
+
+class tarea {
+    -titulo: string ;
+    -descripcion: string ;
+    -fechaVencimiento: Date ;
+    -fechaCreacion: Date ;
+    -prioridad: string ;
+    -completo: boolean ;
+    -porcentajeAvance: number ;
+    -categoria: string ;
+    -etiqueta: string ;
+    +constructor(titulo: string, descripcion: string, fechaVencimiento: Date,
+    fechaCreacion: Date, prioridad: string, completo: boolean,
+    porcentajeAvance: number, categoria: string, etiqueta: string) ;
+}
+
+class Director {
+    -builder: builder ;
+    +constructor()
+    +setBuilder(): void ;
+    +construirTareaBasica() 
+    'este solo pediria el setTitulo y setDescripcion
+    +construirTareaCompleta()
+    'Este tendria los sets de cada paso
+}
+
+Tarea .u.> ConstructorTarea
+Director ..> Builder
+@enduml

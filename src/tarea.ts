@@ -11,21 +11,16 @@ export default class Tarea {
     private completado: boolean = false;
     private porcentajeAvance: number = 0;
     private categoria: categoria;
-    private etiqueta: string[] = [] 
+    private etiquetas: string[] = [] 
 
     
     constructor(
-        titulo: string, 
-        descripcion: string, 
-        fechaVencimiento: Date, 
-        prioridad: prioridad, 
-        categoria: categoria
     ) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fechaVencimiento = fechaVencimiento;
-        this.prioridad = prioridad;
-        this.categoria = categoria;
+        this.titulo = "";
+        this.descripcion = "";
+        this.fechaVencimiento = new Date();
+        this.prioridad = 1;
+        this.categoria = 0;
     }
 
     // Getters
@@ -61,8 +56,8 @@ export default class Tarea {
         return this.categoria;
     }
 
-    public getEtiqueta(): string[] {
-        return this.etiqueta;
+    public getEtiquetas(): string[] {
+        return this.etiquetas;
     }
 
     // Setters
@@ -94,8 +89,12 @@ export default class Tarea {
         this.categoria = categoria;
     }
 
-    public setEtiqueta(etiqueta: string[]): void {
-        this.etiqueta = etiqueta;
+    public setEtiquetas(etiquetas: string[]): void {
+        this.etiquetas = etiquetas;
+    }
+
+    public agregarEtiqueta(etiqueta: string): void{
+        this.etiquetas.push(etiqueta);
     }
     
 }

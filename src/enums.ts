@@ -5,6 +5,7 @@ export enum prioridad {
 }
 
 export enum categoria {
+    'Sin categoria',
     'Trabajo',
     'Personal',
     'Familia',
