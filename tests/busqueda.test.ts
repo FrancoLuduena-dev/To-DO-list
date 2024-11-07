@@ -1,0 +1,45 @@
+import { Busqueda } from "../src/busqueda"
+import Tarea from "../src/tarea";
+
+// MOCK DE LA TAREA
+const mockTarea = (titulo: string, prioridad: number, fechaVencimiento: Date) => ({
+    getTitulo: () => titulo,
+    getPrioridad: () => prioridad,
+    getFechaVencimiento: () => fechaVencimiento,
+} as Tarea); 
+
+
+describe("Busqueda",() => {
+    let tareas: Tarea[];
+    let busqueda: Busqueda;
+// AGREGO 3 TAREAS
+    beforeEach(() => {
+        tareas = [
+            mockTarea("Comprar comida", 2, new Date(2024, 11, 7)),
+            mockTarea("Estudiar Programacion", 1, new Date(2024, 11, 21)),
+            mockTarea("Entrenar", 3, new Date(2024, 11, 7)),
+        ];
+        busqueda = new Busqueda(tareas);
+    });
+
+// EMPIEZO LOS TEST
+
+    test("busquedaPorTitulo deberia encontrar el titulo", () => {
+        const resultado = busqueda.busquedaPorTitulo("comida");
+        expect(resultado.map(t => t.getTitulo())).toEqual(["Comprar comida"]);
+    });
+    test("busquedaPorTitulo deberia ignorar las MAYÚSCULAS y minusculas", () => {
+        const resultado = busqueda.busquedaPorTitulo("ESTUDIAR");
+        expect(resultado.map(t => t.getTitulo())).toEqual(["Estudiar Programacion"]);
+    });
+    test("busquedaPorFechaVencimiento debería devolver tareas con la fecha exacta", () => {
+        const resultado = busqueda.buscarPorFechaDeVencimiento(new Date(2024, 11, 7));
+        expect(resultado.map(t => t.getPrioridad())).toEqual(["Comprar comida", "Entrenar"]);
+    });
+    test("busquedaPorFechaVencimiento deberia devolver vacio si no hay coincidencia", () => {
+        const resultado = busqueda.buscarPorFechaDeVencimiento(new Date(2023, 11, 7));
+        expect(resultado).toEqual([]);
+    });
+
+
+});
