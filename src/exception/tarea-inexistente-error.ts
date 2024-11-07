@@ -1,10 +1,7 @@
-export default class tareaInexistenteError extends Error {
+export default class TareaInexistenteError extends Error {
     constructor(message: string) {
       super(message);
+      this.name = 'TareaInexistenteError';
     }
 
-    public getMessage(): string{
-        return this.message;
-    };
-
-  }
+}

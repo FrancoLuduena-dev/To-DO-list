@@ -1,16 +1,16 @@
-import { Builder } from "./Builder";
+import { Builder } from "./builder";
 import { categoria, prioridad } from "./enums";
-import Tarea from "./tarea"
+import Tarea from "./tarea";
 
 export default class ConstructorTarea implements Builder {
     private tarea: Tarea;
     
     constructor(){
-        this.tarea = new Tarea();
+        this.tarea = new Tarea("", "", new Date(), prioridad.media, categoria.Sin_categoria);
     }
 
     public reset(): void {
-        this.tarea = new Tarea();
+        this.tarea = new Tarea("", "", new Date(), prioridad.media, categoria.Sin_categoria);
     }
     
     public setTitulo(titulo: string){
@@ -33,8 +33,8 @@ export default class ConstructorTarea implements Builder {
         this.tarea.setCategoria(categoria);
     }
 
-    public setEtiqueta(etiqueta: string[]){
-        this.tarea.setEtiqueta(etiqueta);
+    public setEtiquetas(etiqueta: string[]){
+        this.tarea.setEtiquetas(etiqueta);
     }
 
     public construirTarea(): Tarea{

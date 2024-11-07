@@ -1,7 +1,7 @@
-import tareaInexistenteError from "./exception/tarea-inexistente-error";
+import TareaInexistenteError from "./exception/tarea-inexistente-error";
 import Tarea from "./tarea";
 
-export default class toDoLista {
+export default class ToDoLista {
     private listaTareas: Tarea[] = [];
     
     public agregarALista(tarea: Tarea): void {
@@ -11,33 +11,34 @@ export default class toDoLista {
     public borrarDeLista(tarea: Tarea): void {
         try {
             let inicio = this.listaTareas.indexOf(tarea);
-            if (this.listaTareas.indexOf(tarea) === -1) {
-                throw new tareaInexistenteError(`la tarea \"${tarea.getTitulo()}\" no se encuentra en la lista`);
+            if (inicio === -1) {
+                throw new TareaInexistenteError(`la tarea \"${tarea.getTitulo()}\" no se encuentra en la lista`);
             }
-            let final = inicio + 1
-            this.listaTareas.splice(inicio, final);
+            this.listaTareas.splice(inicio, 1);
         } catch (error) {
-            if(error instanceof tareaInexistenteError){
-               console.log( error.getMessage())
+            if(error instanceof TareaInexistenteError){
+               console.log(error.message);
                 // no se si dejarlo como console.log el mensaje o si deberia ser simplemente un return, por los tests 
-                //return error.getMessage();
+                //return error.message;
             }
         }
     }
 
     public borrarPorTitulo(titulo: string) {
         try {
-            // let tarea = logica de busqueda por titulo
-            // this.borrarDeLista(tarea);
+            const tarea: Tarea | undefined = this.listaTareas.find(t => t.getTitulo() === titulo);
+            if (!tarea) {
+                throw new TareaInexistenteError(`la tarea con el título \"${titulo}\" no se encuentra en la lista`);
+            }
+            this.borrarDeLista(tarea);
         } catch (error) {
-            // la tarea no existe
+            if (error instanceof TareaInexistenteError) {
+                console.log(error.message);
+            }
         }
     }
 
     // falta, si vamos a ponerlos al final listaTareasCompletadas[] y listaTareasPendientes[], o sino podemos hacer metodos que solo devuelvan de la lista los objetos que completado === true y completado !== true
-
-
-
 
     /*
         public static agregarTareaALista(titulo: string, tarea: Tarea): void{

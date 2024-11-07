@@ -1,26 +1,28 @@
-
 import { categoria, prioridad } from "./enums";
-
+import TareaInexistenteError from "./exception/tarea-inexistente-error";
 
 export default class Tarea {
     private titulo: string;
-    private descripcion:string;
-    private fechaVencimiento:Date;
-    private fechaCreacion:Date = new Date();
-    private prioridad:prioridad;
+    private descripcion: string;
+    private fechaVencimiento: Date;
+    private fechaCreacion: Date = new Date();
+    private prioridad: prioridad;
     private completado: boolean = false;
     private porcentajeAvance: number = 0;
     private categoria: categoria;
-    private etiquetas: string[] = [] 
-
-    
+    private etiquetas: string[] = []
     constructor(
+        titulo: string, 
+        descripcion: string, 
+        fechaVencimiento: Date, 
+        prioridad: prioridad, 
+        categoria: categoria
     ) {
-        this.titulo = "";
-        this.descripcion = "";
-        this.fechaVencimiento = new Date();
-        this.prioridad = 1;
-        this.categoria = 0;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.prioridad = prioridad;
+        this.categoria = categoria;
     }
 
     // Getters
@@ -93,8 +95,22 @@ export default class Tarea {
         this.etiquetas = etiquetas;
     }
 
-    public agregarEtiqueta(etiqueta: string): void{
+    public agregarEtiqueta(etiqueta: string): void {
         this.etiquetas.push(etiqueta);
     }
-    
+
+    public borrarEtiqueta(etiqueta: string): void {
+        try {
+            let inicio = this.etiquetas.indexOf(etiqueta);
+            if (inicio === -1) {
+                throw new TareaInexistenteError(`la tarea no posee la etiqueta:  \"${etiqueta}\"`);
+            }
+            this.etiquetas.splice(inicio, 1);
+        }
+        catch (error) {
+            if (error instanceof TareaInexistenteError) {
+                console.log(error.message);
+            }
+        }
+    }
 }
