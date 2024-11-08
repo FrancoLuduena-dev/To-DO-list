@@ -38,24 +38,13 @@ export default class ToDoLista {
         }
     }
 
-    // falta, si vamos a ponerlos al final listaTareasCompletadas[] y listaTareasPendientes[], o sino podemos hacer metodos que solo devuelvan de la lista los objetos que completado === true y completado !== true
-
-    /*
-        public static agregarTareaALista(titulo: string, tarea: Tarea): void{
-            this.( tarea);
-        }
+    public getTareaDeLista(titulo: string): Tarea | undefined {
+        return this.listaTareas.find(t => t.getTitulo() === titulo);
+            // cambiarlo por el search hecho de los chicos.
     
-        public static getTareaDeLista(titulo: string): Tarea | undefined {
-            return toDoLista.listaTareas.get(titulo);   
-            // ver si puedo hacer un return mejor: la fecha imprime horas y minutos y segundos, y prioridad y categoria ver que lo imprima como el nombre, no un number
-        
-        }
+    }
     
-        public static getTitulosDeTareas(): string[]{
-            return Array.from(toDoLista.listaTareas.keys());
-        }
-    */
-
+    
 
 
 }

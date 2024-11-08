@@ -4,42 +4,57 @@ import Tarea from "./tarea";
 
 export default class ConstructorTarea implements Builder {
     private tarea: Tarea;
-    
-    constructor(){
-        this.tarea = new Tarea("", "", new Date(), prioridad.media, categoria.Sin_categoria);
+
+    constructor() {
+        this.tarea = new Tarea("", "", null, null, null);
     }
 
     public reset(): void {
-        this.tarea = new Tarea("", "", new Date(), prioridad.media, categoria.Sin_categoria);
+        this.tarea = new Tarea("", "", null, null, null);
     }
-    
-    public setTitulo(titulo: string){
+
+    public setTitulo(titulo: string): this {
         this.tarea.setTitulo(titulo);
+        return this;
     }
-    
-    public setDescripcion(descripcion: string): void {
+
+    public setDescripcion(descripcion: string): this {
         this.tarea.setDescripcion(descripcion);
+        return this;
     }
 
-    public setFechaVencimiento(fechaVencimiento: Date): void{
-        this.tarea.setFechaVencimiento(fechaVencimiento)
+    public setFechaVencimiento(fechaVencimiento: Date): this {
+        this.tarea.setFechaVencimiento(fechaVencimiento);
+        return this;
     }
 
-    public setPrioridad(prioridad: prioridad){
+    public setPrioridad(prioridad: prioridad): this {
         this.tarea.setPrioridad(prioridad);
+        return this;
     }
 
-    public setCategoria(categoria: categoria){
+
+    public setCompletado(completado: boolean): this {
+        this.tarea.setCompletado(completado);
+        return this;
+    }
+
+    public setPorcentajeAvance(porcentaje: number): this {
+        this.tarea.setPorcentajeAvance(porcentaje);
+        return this;
+    }
+
+    public setCategoria(categoria: categoria): this {
         this.tarea.setCategoria(categoria);
+        return this;
     }
 
-    public setEtiquetas(etiqueta: string[]){
+    public setEtiquetas(etiqueta: string[]): this {
         this.tarea.setEtiquetas(etiqueta);
+        return this;
     }
 
-    public construirTarea(): Tarea{
-        const resultado = this.tarea;
-        this.reset();
-        return resultado;
+    public construirTarea(): Tarea {
+        return this.tarea;
     }
 }

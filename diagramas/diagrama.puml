@@ -2,71 +2,74 @@
 title TO DO list
 
 interface Builder #Thistle;header:444{
-    +setTitulo(titulo: string) ;
-    +setDescripcion(descripcion: string) ;
+    setTitulo(titulo: string): void;
+    setDescripcion(descripcion: string): void;
+    setFechaVencimiento(fechaVencimiento: Date): void;
+    setPrioridad(prioridad: prioridad): void;
+    setCategoria(categoria: categoria): void;
+    setEtiquetas(etiquetas: string[]): void;
+    construirTarea(): void;
 }
-
 
 class Tarea #TECHNOLOGY;header:444{
     - titulo: string;
     - descripcion: string;
-    - fechaVencimiento: date;
+    - fechaVencimiento: date| null;
     - fechaCreacion: date;
-    - prioridad: string;
+    - fechaFinalizacion: date | null;
+    - prioridad: prioridad | null ;
     - completado: boolean;
     - porcentajeAvance: number;
-    - categoria: string;
+    - categoria: categoria | null;
     - etiqueta: string;
     + setters()
     + getters()
-    + agregarTarea(): void;
-    + borrarTarea(): void;
+    + agregarEtiqueta(): void;
+    + borrarEtiqueta(): void;
 }
 
 class ConstructorTarea #TECHNOLOGY;header:444 implements Builder {
+    - tarea: Tarea;
     +reset(): void ;
-    +setTitulo(titulo: string) ;
-    +setDescripcion(descripcion: string) ;
-    +setFechaVencimiento(fechaVencimiento: Date) ;
-    +setPrioridad(prioridad: prioridad) ;
-    +setCategoria(categoria: categoria) ;
-    +setEtiqueta(etiqueta: string) ;
-    +construirTarea()
+    +setTitulo(titulo: string): this ;
+    +setDescripcion(descripcion: string): this ;
+    +setFechaVencimiento(fechaVencimiento: Date): this ;
+    +setPrioridad(prioridad: prioridad): this ;
+    +setCompletado(completado: boolean): this ;
+    +setPorcentajeAvance(porcentajeAvance: number): this ;
+    +setCategoria(categoria: categoria)v ;
+    +setEtiquetas(etiqueta: string): this ;
+    +construirTarea(): Tarea;
 }
 
 class Director #TECHNOLOGY;header:444{
-    -builder: builder ;
-    +constructor()
+    -builder: constructorTarea ;
+    -lista: ToDoLista;
     +setBuilder(): void ;
-    +construirTareaBasica() 
-    'este solo pediria el setTitulo y setDescripcion
-    +construirTareaCompleta()
-    'Este tendria los sets de cada paso
+    +construirTareaCompleta(): Tarea;
 }
 
 enum prioridad #LightSalmon;header:444{
-    baja, 
+    baja,
     media,
     alta
-}
+    }
 
 enum categorias #LightSalmon;header:444{
-    trabajo, 
-    personal, 
-    familia, 
-    estudio
+    Trabajo,
+    Personal,
+    Familia,
+    Estudio
 }
-
 
 class ToDoLista #TECHNOLOGY;header:444{
     - listaTareas[]: tarea[] ;
-    - listaTareasCompletadas[]: tarea;
-    - listaTareasPendientes[]: tarea;
-    + agregarTareaALista(): void;
+    + agregarALista(): void;
     + getTareaDeLista(): Tarea;
-    + getTitulosDeTareas(): string[];
-    + borrarTareaDeLista(): void;
+    + borrarDeLista(): void;
+    + borrarPorTitulo(): void;
     + modificares de parametros()
+    ' NO SE SI SON NECESARIOS ESTOS, PUEDE TOMARLOS DEL GENERAL
 }
 
 class Busqueda #TECHNOLOGY;header:444{
@@ -99,43 +102,43 @@ class Persistencia #TECHNOLOGY;header:444{
     + leer();
 }
 
-exception tareaInexistenteError #LightCoral;header:444{
-    + getMessage()
-}
+exception tareaInexistenteError #LightCoral;header:444{}
+
+exception EtiquetaInexistenteError #LightCoral;header:444{}
 
 'relaciones
-skinparam ranksep 100
-'cambia el largo de las flechas
-skinparam nodesep 100
-'cambia la distancia entre los cuadrados
-Tarea .u.> ConstructorTarea
-Director ..> Builder
-prioridad .r.> Tarea::prioridad
-categorias .l.> Tarea::categoria
-Tarea ..* ToDoLista 
-ToDoLista::borrarTareaDeLista <.l. tareaInexistenteError 
-ToDoLista .d.> CalculadoraEstadistica
-ToDoLista .d.> Busqueda
-ToDoLista .d.> Ordenamiento
-ToDoLista .d.> Persistencia
+    skinparam ranksep 100
+    'cambia el largo de las flechas
+    skinparam nodesep 100
+    'cambia la distancia entre los cuadrados
 
-
+    
+    categorias .r.> Tarea::categoria
+    Tarea .u.> ConstructorTarea
+    Tarea ..* ToDoLista
+    prioridad .l.> Tarea::prioridad
+    Tarea::borrarEtiqueta <.r. EtiquetaInexistenteError
+    ToDoLista::borrarDeLista <.l. tareaInexistenteError
+    ToDoLista::borrarPorTitulo <.l. tareaInexistenteError
+    ToDoLista .d.> CalculadoraEstadistica
+    ToDoLista .d.> Busqueda
+    ToDoLista .d.> Ordenamiento
+    ToDoLista .d.> Persistencia
+    Director ..> Builder
 
 'notas
-
-'diseño
-/'
-clase: #TECHNOLOGY;header:444
-clase: abstracta #LightCyan;header:444
-interfaz: #Thistle;header:444
-enums: #LightSalmon;header:444
-excepciones: #LightCoral;header:444
-'/
-skinparam roundcorner 20
-'cambia las esquinas de las clases para hacerlas mas redondeadas
-skinparam classFontColor automatic
-'cambia el color de fuente de todas las clases asi se ve en blanco sobre el fondo oscuro.
-
-
+    'diseño
+        'colores de clases
+        /'
+        clase: #TECHNOLOGY;header:444
+        clase: abstracta #LightCyan;header:444
+        interfaz: #Thistle;header:444
+        enums: #LightSalmon;header:444
+        excepciones: #LightCoral;header:444
+        '/
+    skinparam roundcorner 20
+    'cambia las esquinas de las clases para hacerlas mas redondeadas
+    skinparam classFontColor automatic
+    'cambia el color de fuente de todas las clases asi se ve en blanco sobre el fondo oscuro
 
 @enduml
