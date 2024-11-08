@@ -18,6 +18,7 @@ describe("Busqueda",() => {
             mockTarea("Comprar comida", 2, new Date(2024, 11, 7)),
             mockTarea("Estudiar Programacion", 1, new Date(2024, 11, 21)),
             mockTarea("Entrenar", 3, new Date(2024, 11, 7)),
+            mockTarea("Leer un libro", 1, new Date(2024, 9, 5)),
         ];
         busqueda = new Busqueda(tareas);
     });
@@ -32,9 +33,10 @@ describe("Busqueda",() => {
         const resultado = busqueda.busquedaPorTitulo("ESTUDIAR");
         expect(resultado.map(t => t.getTitulo())).toEqual(["Estudiar Programacion"]);
     });
-    test("busquedaPorFechaVencimiento debería devolver tareas con la fecha exacta", () => {
-        const resultado = busqueda.buscarPorFechaDeVencimiento(new Date(2024, 11, 7));
-        expect(resultado.map(t => t.getPrioridad())).toEqual(["Comprar comida", "Entrenar"]);
+    test("buscarPorFechaDeVencimiento debería devolver solo las tareas con la fecha exacta", () => {
+        const fechaObjetivo = new Date(2024, 11, 7);  
+        const resultado = busqueda.buscarPorFechaDeVencimiento(fechaObjetivo);
+        expect(resultado.map(t => t.getTitulo())).toEqual(["Comprar comida", "Entrenar"]);
     });
     test("busquedaPorFechaVencimiento deberia devolver vacio si no hay coincidencia", () => {
         const resultado = busqueda.buscarPorFechaDeVencimiento(new Date(2023, 11, 7));
