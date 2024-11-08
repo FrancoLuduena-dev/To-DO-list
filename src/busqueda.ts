@@ -14,9 +14,15 @@ export class Busqueda {
             tarea.getTitulo().toLowerCase().includes(titulo.toLowerCase()));
     }
     // BUSQUEDA POR FECHA DE VENCIMIENTO
-    buscarPorFechaDeVencimiento(fecha: Date): Tarea[]{
-        return this.tareas.filter(tarea => 
-            tarea.getFechaVencimiento() === fecha
-        );
+    buscarPorFechaDeVencimiento(fecha: Date): Tarea[] {
+        return this.tareas.filter(tarea => {
+            const tareaFecha = tarea.getFechaVencimiento();
+            return (
+                tareaFecha.getFullYear() === fecha.getFullYear() &&
+                tareaFecha.getMonth() === fecha.getMonth() &&
+                tareaFecha.getDate() === fecha.getDate()
+            );
+        });
     }
+    
 }
