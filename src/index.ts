@@ -1,11 +1,22 @@
 import Tarea from "./tarea"
 import toDoLista from "./toDoList"
+import { Persistencia } from "./persistencia/persistencia";
+
 
 console.log("Hola mundo")
 let tarea1 = new Tarea("prueba", "probando", new Date("2022-11-05"), 1, 0);
 let prueba = new toDoLista();
-prueba.agregarALista(tarea1);
-console.log(prueba);
-prueba.borrarDeLista(tarea1);
-console.log(prueba);
-prueba.borrarDeLista(tarea1);
+
+async function main() {
+    let base_de_datos = await Persistencia.obtenerBaseDeDatos()
+
+    base_de_datos.tareas[0].titulo = "Probando!!!"
+
+    Persistencia.guardarBaseDeDatos(JSON.stringify(base_de_datos))
+
+
+}
+
+
+
+main()
