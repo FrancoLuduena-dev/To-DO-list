@@ -11,6 +11,11 @@ export class Ordenamiento {
             const fechaA = a.getFechaVencimiento();
             const fechaB = b.getFechaVencimiento();
 
+            // Casos en el que la fecha es Null
+            if (fechaA === null && fechaB === null) return 0;
+            if (fechaA === null) return ascendiente ? 1 : -1;
+            if (fechaB === null) return ascendiente ? -1 : 1;
+
             if (ascendiente === true) {
                 if (fechaA.getFullYear() !== fechaB.getFullYear()) {
                     return fechaA.getFullYear() - fechaB.getFullYear();
@@ -29,8 +34,8 @@ export class Ordenamiento {
                 }
             }
         });
-    } 
-    
+    }
+
     //ordena alfabeticamente 
     public ordenarPorTitulo(listaDesordenada: Array<tarea>): Array<tarea> {
         listaDesordenada.sort((a, b) => {
@@ -40,23 +45,22 @@ export class Ordenamiento {
         });
         return listaDesordenada;
     }
-        
 
-    
+
+
 
     // ordena por prioridad con el metodo sort
     public ordenarPorPrioridad(listaDesordenada: Array<tarea>, ascendente: boolean): Array<tarea> {
-        
-        listaDesordenada.sort((a, b) => {
+        return listaDesordenada.sort((a, b) => {
             const prioridadA = a.getPrioridad();
             const prioridadB = b.getPrioridad();
 
-            if(ascendente === true){
-                return prioridadA - prioridadB;
-            } else {
-                return prioridadB - prioridadA;
-            }
+            // Manejo de casos donde la prioridad puede ser null
+            if (prioridadA === null && prioridadB === null) return 0;
+            if (prioridadA === null) return ascendente ? 1 : -1;
+            if (prioridadB === null) return ascendente ? -1 : 1;
+
+            return ascendente ? prioridadA - prioridadB : prioridadB - prioridadA;
         });
-        return listaDesordenada;
     }
 }
