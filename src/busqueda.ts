@@ -17,6 +17,10 @@ export class Busqueda {
     buscarPorFechaDeVencimiento(fecha: Date): Tarea[] {
         return this.tareas.filter(tarea => {
             const tareaFecha = tarea.getFechaVencimiento();
+            
+            // Verifigo si la fecha de vencimiento es null
+            if(tareaFecha === null) return false;
+
             return (
                 tareaFecha.getFullYear() === fecha.getFullYear() &&
                 tareaFecha.getMonth() === fecha.getMonth() &&
