@@ -63,4 +63,16 @@ export class Ordenamiento {
             return ascendente ? prioridadA - prioridadB : prioridadB - prioridadA;
         });
     }
+    public ordenarPorEtiquetas(listaDesordenada: Array<tarea>, ascendente: boolean): Array<tarea> {
+        return listaDesordenada.sort((a, b) => {
+          const etiquetasA = a.getEtiquetas().join(',').toLowerCase();
+          const etiquetasB = b.getEtiquetas().join(',').toLowerCase();
+      
+          if (ascendente) {
+            return etiquetasA.localeCompare(etiquetasB);
+          } else {
+            return etiquetasB.localeCompare(etiquetasA);
+          }
+        });
+      }      
 }
