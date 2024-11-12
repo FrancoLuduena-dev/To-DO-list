@@ -28,5 +28,9 @@ export class Busqueda {
             );
         });
     }
+    busquedaPorEtiqueta(etiqueta: string): Tarea[] {
+        return this.tareas.filter(tarea => 
+            tarea.getEtiquetas().includes(etiqueta.toLowerCase()));
+    }
     
 }
