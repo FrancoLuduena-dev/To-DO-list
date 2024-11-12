@@ -29,5 +29,8 @@
     "typedoc": "^0.26.11",
     "typescript": "^4.9"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "stdio": "github:alemutn/stdio#master"
+  }
 }
