@@ -43,6 +43,10 @@ export default class ToDoLista {
             // cambiarlo por el search hecho de los chicos.
     
     }
+
+    public getListaTareas(): Array<Tarea> {
+        return this.listaTareas;
+    }
     
     
 

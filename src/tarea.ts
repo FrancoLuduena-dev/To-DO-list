@@ -44,6 +44,10 @@ export default class Tarea {
         return this.fechaCreacion;
     }
 
+    public getFechaFinalizacion(): Date | null {
+        return this.fechaFinalizacion;
+    }
+
     public getPrioridad(): prioridad |  null{
         return this.prioridad;
     }
