@@ -3,7 +3,7 @@ import { prioridad, categoria } from "./enums";
 import Tarea from "./tarea";
 import ToDoLista from "./toDoList";
 
-export default class Director {
+class Director {
     private builder: ConstructorTarea;
     private lista: ToDoLista;
 
@@ -24,3 +24,6 @@ export default class Director {
         return resultado;
     }
 }
+
+export { Director };
+export default Director;

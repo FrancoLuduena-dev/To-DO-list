@@ -1,6 +1,7 @@
 import Tarea from "./tarea"
 import toDoLista from "./toDoList"
-import { Persistencia } from "./persistencia/persistencia";
+import  Persistencia  from "./persistencia/persistencia";
+import  Ordenamiento  from "./ordenamiento";
 
 
 console.log("Hola mundo")

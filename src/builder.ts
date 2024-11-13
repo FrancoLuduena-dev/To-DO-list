@@ -1,6 +1,6 @@
 import { categoria, prioridad } from "./enums";
 
-export interface Builder{
+interface Builder{
     reset(): void;
     setTitulo(titulo: string): void;
     setDescripcion(descripcion: string): void;
@@ -10,3 +10,6 @@ export interface Builder{
     setEtiquetas(etiquetas: string[]): void;
     construirTarea(): void;
 }
+
+export { Builder };
+export default Builder;

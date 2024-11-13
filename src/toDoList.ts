@@ -1,7 +1,7 @@
 import TareaInexistenteError from "./exception/tarea-inexistente-error";
 import Tarea from "./tarea";
 
-export default class ToDoLista {
+class ToDoLista {
     private listaTareas: Tarea[] = [];
     
     public agregarALista(tarea: Tarea): void {
@@ -52,3 +52,6 @@ export default class ToDoLista {
 
 
 }
+
+export { ToDoLista };
+export default ToDoLista;

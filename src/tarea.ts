@@ -1,7 +1,7 @@
 import { categoria, prioridad } from "./enums";
 import EtiquetaInexistenteError from "./exception/etiqueta-inexistente-error";
 
-export default class Tarea {
+class Tarea {
     private titulo: string;
     private descripcion: string;
     private fechaVencimiento: Date | null;
@@ -129,3 +129,7 @@ export default class Tarea {
         }
     }
 }
+
+
+export { Tarea };
+export default Tarea;

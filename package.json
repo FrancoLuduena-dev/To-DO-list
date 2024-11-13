@@ -1,7 +1,7 @@
 {
-  "name": "cuvl_lab3",
+  "name": "TP GRUPO 1 PROGRAMACION II",
   "version": "1.0.0",
-  "description": "cuvl_lab3",
+  "description": "TP GRUPO 1 PROGRAMACION II",
   "main": "dist/app.js",
   "scripts": {
     "build": "tsc",

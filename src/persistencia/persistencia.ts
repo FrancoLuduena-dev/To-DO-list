@@ -5,7 +5,7 @@ import {CustomFileClass} from 'stdio'
 const file: CustomFileClass = new CustomFileClass();
 
 
-export abstract class Persistencia {
+abstract class Persistencia {
 
 
 
@@ -43,3 +43,7 @@ export abstract class Persistencia {
 
 
 }
+
+
+export { Persistencia };
+export default Persistencia;

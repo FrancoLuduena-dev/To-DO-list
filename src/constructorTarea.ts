@@ -2,7 +2,7 @@ import { Builder } from "./builder";
 import { categoria, prioridad } from "./enums";
 import Tarea from "./tarea";
 
-export default class ConstructorTarea implements Builder {
+class ConstructorTarea implements Builder {
     private tarea: Tarea;
 
     constructor() {
@@ -58,3 +58,8 @@ export default class ConstructorTarea implements Builder {
         return this.tarea;
     }
 }
+
+
+
+export { ConstructorTarea };
+export default ConstructorTarea;

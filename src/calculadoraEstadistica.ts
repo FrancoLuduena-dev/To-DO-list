@@ -1,7 +1,7 @@
 import toDoList from "./toDoList";
 import tarea from "./tarea";
 
-class calculadoraEstadistica {
+class CalculadoraEstadistica {
     private tasaFinalizacion: number = 0;
     private numeroTareasCompletadas: number = 0;
     private numeroTareasTotales: number = 0;
@@ -39,3 +39,7 @@ class calculadoraEstadistica {
         return this.listadoTiempoDedicadoXTarea;
     }
 }
+
+
+export { CalculadoraEstadistica };
+export default CalculadoraEstadistica;
