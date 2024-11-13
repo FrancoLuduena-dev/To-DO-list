@@ -74,6 +74,5 @@ export class Ordenamiento {
             return etiquetasB.localeCompare(etiquetasA);
           }
         });
-        return listaDesordenada;
       }      
 }
