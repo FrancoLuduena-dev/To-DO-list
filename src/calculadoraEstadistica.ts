@@ -9,6 +9,8 @@ class CalculadoraEstadistica {
     private tiempoDedicadoATareas: number = 0;
 
     public calcularTasa(listaTareas: toDoList): number {
+        this.numeroTareasTotales = 0;
+        this.numeroTareasCompletadas = 0;
         for (let i = 0; i < listaTareas.getListaTareas().length; i++) {
             if (listaTareas.getListaTareas()[i].getCompletado() === true) {
                 this.numeroTareasCompletadas++;
