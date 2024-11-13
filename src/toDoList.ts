@@ -47,6 +47,10 @@ class ToDoLista {
     public getListaTareas(): Array<Tarea> {
         return this.listaTareas;
     }
+
+    public setListaTareas(tareas: Tarea[]): void {
+        this.listaTareas = tareas;
+    }
     
     
 

@@ -1,5 +1,7 @@
 import path from "path";
 import {CustomFileClass} from 'stdio'
+import Tarea from "../tarea";
+import { prioridad, categoria } from "../enums";
 
 
 const file: CustomFileClass = new CustomFileClass();
@@ -22,8 +24,11 @@ abstract class Persistencia {
           
           i++;
         }
-      
-        return  await JSON.parse(json_array.join(''))
+        
+        const objetos = await JSON.parse(json_array.join(''));
+
+
+        return objetos.map((objeto: { titulo: string; descripcion: string; fechaVencimiento: Date | null; prioridad: prioridad | null; categoria: categoria | null; }) => new Tarea(objeto.titulo, objeto.descripcion,objeto.fechaVencimiento,objeto.prioridad,objeto.categoria))
         
         
       }

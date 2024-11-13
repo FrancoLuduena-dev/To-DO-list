@@ -1,4 +1,4 @@
-import tarea from "./tarea";
+import tarea, { Tarea } from "./tarea";
 
 class Ordenamiento {
     // este flag booleano decide si el orden se hace de mayor a menor o menor a mayor
@@ -50,9 +50,9 @@ class Ordenamiento {
 
     // ordena por prioridad con el metodo sort
     public ordenarPorPrioridad(
-        listaDesordenada: Array<tarea>,
+        listaDesordenada: Tarea[],
         ascendente: boolean
-    ): Array<tarea> {
+    ): Tarea[] {
         return listaDesordenada.sort((a, b) => {
             const prioridadA = a.getPrioridad();
             const prioridadB = b.getPrioridad();

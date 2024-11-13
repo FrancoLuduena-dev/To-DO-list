@@ -2,23 +2,33 @@ import Tarea from "./tarea"
 import toDoLista from "./toDoList"
 import  Persistencia  from "./persistencia/persistencia";
 import  Ordenamiento  from "./ordenamiento";
+import { Busqueda } from "./busqueda";
+import Director from "./director";
+import ConstructorTarea from "./constructorTarea";
 
 
-console.log("Hola mundo")
 let tarea1 = new Tarea("prueba", "probando", new Date("2022-11-05"), 1, 0);
 let prueba = new toDoLista();
+let ordentamiento = new Ordenamiento()
+const constructor = new ConstructorTarea()
+const director = new Director(constructor, prueba)
+let tarea2 = director.construirTareaCompleta()
+
 
 async function main() {
-    let base_de_datos = await Persistencia.obtenerBaseDeDatos()
+    let datos = await Persistencia.obtenerBaseDeDatos();
 
-    base_de_datos.tareas[0].titulo = "Probando!!!"
+    prueba.setListaTareas(datos);
 
-    Persistencia.guardarBaseDeDatos(JSON.stringify(base_de_datos))
+    prueba.borrarPorTitulo("prueba")
+    
+    
+
+   Persistencia.guardarBaseDeDatos(JSON.stringify(prueba.getListaTareas()))
+
 
 
 }
-
-
 
 main()
 
