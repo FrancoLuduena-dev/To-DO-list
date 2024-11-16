@@ -1,5 +1,6 @@
 import { Busqueda } from "../src/busqueda"
 import Tarea from "../src/tarea";
+import { mock } from "jest-mock-extended";
 
 // MOCK DE LA TAREA
 const mockTarea = (titulo: string, prioridad: number, fechaVencimiento: Date) => ({
@@ -41,6 +42,23 @@ describe("Busqueda",() => {
     test("busquedaPorFechaVencimiento deberia devolver vacio si no hay coincidencia", () => {
         const resultado = busqueda.buscarPorFechaDeVencimiento(new Date(2023, 11, 7));
         expect(resultado).toEqual([]);
+    });
+
+    test('debería devolver tareas que contienen la etiqueta buscada', () => {
+        const tarea1 = mock<Tarea>();
+        tarea1.getEtiquetas.mockReturnValue(['etiquetaA', 'etiquetaB']);
+        
+        const tarea2 = mock<Tarea>();
+        tarea2.getEtiquetas.mockReturnValue(['etiquetaC']);
+        
+        const tarea3 = mock<Tarea>();
+        tarea3.getEtiquetas.mockReturnValue(['etiquetaa']);
+        
+        
+
+        const resultado = busqueda.busquedaPorEtiqueta([tarea1, tarea2, tarea3],'etiquetaA');
+
+        expect(resultado).toEqual([tarea1,tarea3]); // Debería devolver tarea1 y tarea3, sin ser case sensitive.
     });
 
 

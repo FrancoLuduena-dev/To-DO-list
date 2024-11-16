@@ -65,9 +65,11 @@ export class Busqueda {
     
     
     
-    busquedaPorEtiqueta(etiqueta: string): Tarea[] {
-        return this.tareas.filter(tarea => 
-            tarea.getEtiquetas().includes(etiqueta.toLowerCase()));
-    }
+    busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[] {
+        return tareas.filter(tarea => 
+            tarea.getEtiquetas().some(etiquetaTarea => 
+                etiquetaTarea.toLowerCase() === etiqueta.toLowerCase()
+            )
+        );
     
-}
+}}
