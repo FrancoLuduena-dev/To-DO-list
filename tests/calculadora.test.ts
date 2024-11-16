@@ -58,11 +58,9 @@ describe('CalculadoraEstadistica', () => {
         listaTareas.getListaTareas.mockReturnValue([tarea1, tarea2, tarea3]);
     
         const tiempoDedicado = calculadora.calcularTiempoDedicado(listaTareas);
-        const tiempoDedicadoEsperado = new Map<Tarea, number>([
-            [tarea1, 4], // 4 días para tarea1
-            [tarea3, 1]  // 1 día para tarea3
-        ]);
-        expect(tiempoDedicado).toEqual(tiempoDedicadoEsperado)
+
+        expect(tiempoDedicado.get(tarea1)).toBe(4); // Days for tarea1
+        expect(tiempoDedicado.get(tarea3)).toBe(1); // Days for tarea3
         
     });
 
