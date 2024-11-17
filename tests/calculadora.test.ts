@@ -72,6 +72,7 @@ describe('CalculadoraEstadistica', () => {
         tarea1.getFechaCreacion.mockReturnValue(new Date('2023-01-01'));
 
         listaTareas.agregarALista(tarea1);
+        listaTareas.getListaTareas.mockReturnValue([tarea1]); // el mock devuelve las tareas
 
         const tiempoDedicado = calculadora.calcularTiempoDedicado(listaTareas);
         const currentDate = new Date();

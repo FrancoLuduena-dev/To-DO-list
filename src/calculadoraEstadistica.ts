@@ -33,15 +33,15 @@ class CalculadoraEstadistica {
 
             if (listaTareas.getListaTareas()[i].getCompletado() === true) {
 
-                let finalizacionMilisegundos = listaTareas.getListaTareas()[i].getFechaFinalizacion()!.getTime();
-                let creacionMilisegundos = listaTareas.getListaTareas()[i].getFechaCreacion().getTime();
-                let diferenciaMilisegundos = finalizacionMilisegundos - creacionMilisegundos;
+                const finalizacionMilisegundos = listaTareas.getListaTareas()[i].getFechaFinalizacion()!.getTime();
+                const creacionMilisegundos = listaTareas.getListaTareas()[i].getFechaCreacion().getTime();
+                const diferenciaMilisegundos = finalizacionMilisegundos - creacionMilisegundos;
                 const diferenciaDias = Math.floor(diferenciaMilisegundos / (24 * 60 * 60 * 1000));
                 this.listadoTiempoDedicadoXTarea.set(listaTareas.getListaTareas()[i], diferenciaDias);
 
             } else {
-                let currentDate = new Date();
-                let diferencia = Math.floor((currentDate.getTime() - listaTareas.getListaTareas()[i].getFechaCreacion().getTime()) / (24 * 60 * 60 * 1000));
+                const currentDate = new Date();
+                const diferencia = Math.floor((currentDate.getTime() - listaTareas.getListaTareas()[i].getFechaCreacion().getTime()) / (24 * 60 * 60 * 1000));
                 this.listadoTiempoDedicadoXTarea.set(listaTareas.getListaTareas()[i], diferencia);
             }
         }
