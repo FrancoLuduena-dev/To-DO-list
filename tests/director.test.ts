@@ -30,7 +30,7 @@ describe('Director', () => {
     test('construirTarea construye una tarea y la agrega a la lista', () => {
         const tarea = director.construirTarea();
         expect(mockBuilder.construirTarea).toHaveBeenCalled();
-        expect(mockLista.agregarALista).toHaveBeenCalledWith(tarea);
+        expect(mockLista.agregarAListas).toHaveBeenCalledWith(tarea);
         expect(mockBuilder.reset).toHaveBeenCalled();
         expect(tarea).toBe(mockTarea);
     });

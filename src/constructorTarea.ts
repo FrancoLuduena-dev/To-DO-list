@@ -5,7 +5,7 @@ import Tarea from "./tarea";
 /**
  * Clase ConstructorTarea que implementa la interfaz Builder.
  * Esta clase se utiliza para construir instancias de Tarea.
- * @param tarea - La tarea que se está construyendo.
+ * @type {Tarea} tarea - La tarea que se está construyendo.
  */
 class ConstructorTarea implements Builder {
     /**
@@ -30,7 +30,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura el título de la tarea.
-     * @param titulo - El título de la tarea en construccion.
+     * @param {string} titulo - El título de la tarea en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setTitulo(titulo: string): this {
@@ -40,7 +40,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura la descripción de la tarea en construccion.
-     * @param descripcion - La descripción de la tarea  en construccion.
+     * @param  {string} descripcion - La descripción de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setDescripcion(descripcion: string): this {
@@ -50,7 +50,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura la fecha de vencimiento de la tarea en construccion.
-     * @param fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
+     * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setFechaVencimiento(fechaVencimiento: Date): this {
@@ -60,7 +60,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura la prioridad de la tarea en construccion.
-     * @param prioridad - La prioridad de la tarea  en construccion ("baja = 0, "media" = 1 y "alta" = 2").
+     * @param {prioridad} prioridad - La prioridad de la tarea  en construccion ("baja = 0, "media" = 1 y "alta" = 2").
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setPrioridad(prioridad: prioridad): this {
@@ -70,7 +70,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura si la tarea está completada en construccion.
-     * @param completado - El estado de completado de la tarea en construccion ("true" si está completada la tarea y "false" si no lo está).
+     * @param {boolean} completado - El estado de completado de la tarea en construccion ("true" si está completada la tarea y "false" si no lo está).
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setCompletado(completado: boolean): this {
@@ -80,7 +80,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura el porcentaje de avance de la tarea en construccion.
-     * @param porcentaje - El porcentaje de avance de la tarea en construccion.
+     * @param {number} porcentaje - El porcentaje de avance de la tarea en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setPorcentajeAvance(porcentaje: number): this {
@@ -90,7 +90,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura la categoría de la tarea en construccion.
-     * @param categoria - La categoría de la tarea en construccion ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
+     * @param {categoria} categoria - La categoría de la tarea en construccion ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setCategoria(categoria: categoria): this {
@@ -100,7 +100,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura las etiquetas personalidas por el usuario de la tarea en construccion.
-     * @param etiqueta - Las etiquetas personalidas por el usuario de la tarea en construccion.
+     * @param {string[]} etiqueta - Las etiquetas personalidas por el usuario de la tarea en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setEtiquetas(etiqueta: string[]): this {
@@ -110,7 +110,7 @@ class ConstructorTarea implements Builder {
 
     /**
      * Construye la tarea y la devuelve.
-     * @returns La tarea construida.
+     * @returns {Tarea} La tarea construida.
      */
     public construirTarea(): Tarea {
         return this.tarea;

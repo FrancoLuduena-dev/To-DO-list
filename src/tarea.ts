@@ -195,7 +195,7 @@ class Tarea {
      */
     public setCompletado(completado: boolean): void {
         this.completado = completado;
-        if (this.completado === true && this.porcentajeAvance !== 100) {
+        if (this.completado && this.porcentajeAvance !== 100) {
             this.fechaFinalizacion = new Date();
             this.setPorcentajeAvance(100);
         }
@@ -203,11 +203,11 @@ class Tarea {
 
     /**
      * Configura el porcentaje de avance de la tarea.
-     * @param porcentajeAvance - El nuevo porcentaje de avance de la tarea.
+     * @param {number} porcentajeAvance - El nuevo porcentaje de avance de la tarea.
      */
     public setPorcentajeAvance(porcentajeAvance: number): void {
         this.porcentajeAvance = porcentajeAvance;
-        if (this.porcentajeAvance === 100 && this.completado === false) {
+        if (this.porcentajeAvance === 100 && !this.completado) {
             this.setCompletado(true);
             this.fechaFinalizacion = new Date();
         }
@@ -215,7 +215,7 @@ class Tarea {
 
     /**
      * Configura la categoría de la tarea.
-     * @param categoria - La nueva categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
+     * @param {categoria} categoria - La nueva categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      */
     public setCategoria(categoria: categoria): void {
         this.categoria = categoria;
@@ -223,7 +223,7 @@ class Tarea {
 
     /**
      * Configura las etiquetas de la tarea.
-     * @param etiquetas - Las nuevas etiquetas de la tarea.
+     * @param {string[]} etiquetas - Las nuevas etiquetas de la tarea.
      */
     public setEtiquetas(etiquetas: string[]): void {
         this.etiquetas = etiquetas;
@@ -231,7 +231,7 @@ class Tarea {
 
     /**
      * Agrega una etiqueta a la tarea.
-     * @param etiqueta - La etiqueta a agregar.
+     * @param {string} etiqueta - La etiqueta a agregar.
      */
     public agregarEtiqueta(etiqueta: string): void {
         this.etiquetas.push(etiqueta);
@@ -239,7 +239,7 @@ class Tarea {
 
     /**
      * Borra una etiqueta de la tarea.
-     * @param etiqueta - La etiqueta a borrar.
+     * @param {string | void} etiqueta - La etiqueta a borrar.
      * @returns Un mensaje de error si la etiqueta no existe, de lo contrario no retorna nada.
      */
     public borrarEtiqueta(etiqueta: string): string | void {

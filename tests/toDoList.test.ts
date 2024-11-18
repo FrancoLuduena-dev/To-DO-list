@@ -12,28 +12,28 @@ describe('ToDoLista', () => {
 
     test('debería agregar una tarea a la lista', () => {
         const tarea1 = mock<Tarea>();
-        todoLista.agregarALista(tarea1);
+        todoLista.agregarAListas(tarea1);
         expect(todoLista.getListaTareas()).toContain(tarea1);
     });
 
     test('debería borrar una tarea de la lista', () => {
         const tarea1 = mock<Tarea>();
-        todoLista.agregarALista(tarea1);
-        todoLista.borrarDeLista(tarea1);
+        todoLista.agregarAListas(tarea1);
+        todoLista.borrarDeListas(tarea1);
         expect(todoLista.getListaTareas()).not.toContain(tarea1);
     });
 
     test('debería lanzar un error si la tarea a borrar no se encuentra en la lista', () => {
         const tarea1 = mock<Tarea>();
         tarea1.getTitulo.mockReturnValue('Tarea de prueba');
-        const result = todoLista.borrarDeLista(tarea1);
-        expect(result).toBe('la tarea "Tarea de prueba" no se encuentra en la lista');
+        const result = todoLista.borrarDeListas(tarea1);
+        expect(result).toBe('La tarea "Tarea de prueba" no se encuentra en la lista');
     });
 
     test('debería borrar una tarea por título', () => {
         const tarea1 = mock<Tarea>();
         tarea1.getTitulo.mockReturnValue('Tarea de prueba');
-        todoLista.agregarALista(tarea1);
+        todoLista.agregarAListas(tarea1);
         todoLista.borrarPorTitulo('Tarea de prueba');
         expect(todoLista.getListaTareas()).not.toContain(tarea1);
     });
@@ -45,7 +45,7 @@ describe('ToDoLista', () => {
 
     test('debería devolver una tarea de la lista por título', () => {
         const tarea1 = mock<Tarea>();
-        todoLista.agregarALista(tarea1);
+        todoLista.agregarAListas(tarea1);
         tarea1.getTitulo.mockReturnValue('Tarea de prueba');
         const tareaEncontrada = todoLista.getTareaDeLista('Tarea de prueba');
         expect(tareaEncontrada).toBe(tarea1);
@@ -61,17 +61,17 @@ describe('ToDoLista', () => {
         const tarea2 = mock<Tarea>();
         const tarea3 = mock<Tarea>();
         const tarea4 = mock<Tarea>();
-        todoLista.agregarALista(tarea1);
-        todoLista.agregarALista(tarea2);
-        todoLista.agregarALista(tarea3);
-        todoLista.agregarALista(tarea4);
+        todoLista.agregarAListas(tarea1);
+        todoLista.agregarAListas(tarea2);
+        todoLista.agregarAListas(tarea3);
+        todoLista.agregarAListas(tarea4);
 
         expect(todoLista.getListaTareas()).toEqual([tarea1, tarea2, tarea3, tarea4]);
     });
 
     test('debería agregar una nueva tarea a la lista', () => {
         const tarea1 = mock<Tarea>();
-        todoLista.agregarALista(tarea1);
+        todoLista.agregarAListas(tarea1);
         expect(todoLista.getListaTareas()).toEqual([tarea1]);
     });
 });

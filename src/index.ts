@@ -14,8 +14,25 @@ constructor.setTitulo("prueba")
 .setFechaVencimiento(new Date("2022-11-05"))
 .setPrioridad(1)
 .setCategoria(1)
-.setCompletado(true)
+.setCompletado(true);
+director.construirTarea();
 
-let tarea1 = director.construirTarea();
+constructor.setTitulo("segunda tarea") 
+.setDescripcion("prueba de tarea 2")
+.setFechaVencimiento(new Date("2021-10-03"))
+.setPrioridad(0)
+.setCategoria(0);
+director.construirTarea();
+
+console.log("-----------------------")
+lista.getTarea("prueba")?.agregarEtiqueta("prueba");
+lista.getTarea("prueba")?.agregarEtiqueta("prueba 2");
 console.log(lista);
+console.log("-----------------------")
+lista.getTarea("prueba")?.borrarEtiqueta("prueba");
+console.log(lista.getListaTareas());
+let pruebaError = lista.getTarea("prueba 2")?.borrarEtiqueta("prueba");
+console.log(pruebaError);
 
+lista.borrarPorTitulo("prueba");
+console.log(lista);

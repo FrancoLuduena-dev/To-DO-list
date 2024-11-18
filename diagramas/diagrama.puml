@@ -8,24 +8,23 @@ interface Builder #Thistle;header:444{
     setPrioridad(prioridad: prioridad): void;
     setCategoria(categoria: categoria): void;
     setEtiquetas(etiquetas: string[]): void;
-    construirTarea(): void;
+    construirTarea(): Tarea;
 }
 
 class Tarea #TECHNOLOGY;header:444{
     - titulo: string;
     - descripcion: string;
-    - fechaVencimiento: date| null;
-    - fechaCreacion: date;
-    - fechaFinalizacion: date | null;
+    - fechaVencimiento: Date| null;
+    - fechaCreacion: Date;
+    - fechaFinalizacion: Date | null;
     - prioridad: prioridad | null ;
     - completado: boolean;
     - porcentajeAvance: number;
     - categoria: categoria | null;
-    - etiqueta: string;
-    + setters()
-    + getters()
+    - etiqueta: string[];
+    + setters y getters()
     + agregarEtiqueta(): void;
-    + borrarEtiqueta(): void;
+    + borrarEtiqueta(): string | void;
 }
 
 class ConstructorTarea #TECHNOLOGY;header:444 implements Builder {
@@ -62,44 +61,36 @@ enum categorias #LightSalmon;header:444{
     Estudio
 }
 
-class ToDoLista #TECHNOLOGY;header:444{
-    - listaTareas[]: tarea[] ;
-    + agregarALista(): void;
-    + getTareaDeLista(): Tarea;
-    + borrarDeLista(): void;
-    + borrarPorTitulo(): void;
-    + modificares de parametros()
-    ' NO SE SI SON NECESARIOS ESTOS, PUEDE TOMARLOS DEL GENERAL
+class ToDoList #LightSalmon;header:444 {
+    - tareas: Tarea[];
+    + agregarALista(tarea: Tarea): void;
+    + getTareaDeLista(titulo: string): Tarea | undefined;
+    + borrarDeLista(titulo: string): void;
+    + borrarPorTitulo(titulo: string): void;
+    + modificarParametros(titulo: string, parametros: Partial<Tarea>): void;
 }
 
-class Busqueda #TECHNOLOGY;header:444{
-    + buscarPorTitulo(): tarea;
-    + buscarPorFechaVencimiento(): tarea;
-    + buscarPorEtiquetas(): tarea;
+class Busqueda #LightBlue;header:444 {
+    - tareas: Tarea[];
+    + busquedaPorTitulo(titulo: string): Tarea[];
 }
 
-class Ordenamiento #TECHNOLOGY;header:444{
-    - listadoOrdenado[]: tarea;
-    + ordenarPorTitulo(): void;
-    + ordenarPorFecha(): void;
-    + ordenarPorPrioridad(): void;
+class Ordenamiento #LightPink;header:444 {
+    - tareas: Tarea[];
+    + ordenarPorTitulo(): Tarea[];
+    + ordenarPorFecha(): Tarea[];
+    + ordenarPorPrioridad(): Tarea[];
 }
 
-class CalculadoraEstadistica #TECHNOLOGY;header:444{
-    - TasaFinalizacion: number;
-    - numeroTareasCompletadas: number;
-    - numeroTareasTotales: number;
-    - listadoTiempoDedicadoXtarea[<tarea><tiempo>]: number;
-    'esto serviria si hacemos algunas estadisticas que sean algo asi como "promedio de tiempo para resolucion de tareas", o "tiempo dedicado a X categoria / etiqueta", sino yo pondria
-    - TiempoDedicadoATareas: number;
-    'este simplemente sumaria el tiempo desde la creacion de la tarea hasta ahora. Tambien se puede separar en tiempo dedicado a teareas completadas y tiempo dedicado a tareas no completadas
-    + calcularTasa(): number;
-    + calcularTiempoDedicado(): number;
+class CalculadoraEstadistica #LightGreen;header:444 {
+    + calcularPromedio(numeros: number[]): number;
+    + calcularMediana(numeros: number[]): number;
+    + calcularModa(numeros: number[]): number[];
 }
 
-class Persistencia #TECHNOLOGY;header:444{
-    + guardarJSON();
-    + leer();
+class Persistencia #LightGray;header:444 {
+    + static async obtenerBaseDeDatos(): Promise<Tarea[]>;
+    + static async guardarBaseDeDatos(data: string): Promise<void>;
 }
 
 exception tareaInexistenteError #LightCoral;header:444{}
