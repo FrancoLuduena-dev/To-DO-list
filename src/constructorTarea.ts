@@ -53,7 +53,7 @@ class ConstructorTarea implements Builder {
      * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setFechaVencimiento(fechaVencimiento: Date): this {
+    public setFechaVencimiento(fechaVencimiento: string | null): this {
         this.tarea.setFechaVencimiento(fechaVencimiento);
         return this;
     }
@@ -63,7 +63,7 @@ class ConstructorTarea implements Builder {
      * @param {prioridad} prioridad - La prioridad de la tarea  en construccion ("baja = 0, "media" = 1 y "alta" = 2").
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setPrioridad(prioridad: prioridad): this {
+    public setPrioridad(prioridad: prioridad | null): this {
         this.tarea.setPrioridad(prioridad);
         return this;
     }
@@ -93,7 +93,7 @@ class ConstructorTarea implements Builder {
      * @param {categoria} categoria - La categoría de la tarea en construccion ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setCategoria(categoria: categoria): this {
+    public setCategoria(categoria: categoria | null): this {
         this.tarea.setCategoria(categoria);
         return this;
     }
@@ -113,8 +113,25 @@ class ConstructorTarea implements Builder {
      * @returns {Tarea} La tarea construida.
      */
     public construirTarea(): Tarea {
-        return this.tarea;
+        let resultado = this.tarea;
+        this.reset()
+        return resultado;
     }
+
+    public setFechaCreacion(fecha: string): this {
+        this.tarea.setFechaCreacion(fecha)
+
+        return this;
+    }
+
+    public setFechaFinalizacion(fecha: string | null): this {
+        this.tarea.setFechaFinalizacion(fecha)
+
+        return this;
+    }
+
+
+
 }
 
 export { ConstructorTarea };

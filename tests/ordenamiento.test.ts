@@ -18,16 +18,16 @@ describe('test clase ordenamiento', ()=> {
         const tarea3 = mock<Tarea>();
         const tarea4 = mock<Tarea>();
 
-        tarea1.getFechaVencimiento.mockReturnValue(new Date('2024-12-01'));
-        tarea2.getFechaVencimiento.mockReturnValue(new Date('2024-11-01'));
-        tarea3.getFechaVencimiento.mockReturnValue(new Date('2024-10-01'));
-        tarea4.getFechaVencimiento.mockReturnValue(new Date('2025-10-01'));
+        tarea1.getFechaVencimiento.mockReturnValue(new Date('2024-12-25'));
+        tarea2.getFechaVencimiento.mockReturnValue(new Date('2024-11-11'));
+        tarea3.getFechaVencimiento.mockReturnValue(new Date('2024-10-21'));
+        tarea4.getFechaVencimiento.mockReturnValue(new Date('2025-10-26'));
 
 
         const tareas = [tarea1, tarea2, tarea3, tarea4];
         const tareas_ordenadas_true = ordenamiento.ordenarPorFecha(tareas, true)
         
-        expect(tareas_ordenadas_true).toEqual([tarea3,tarea2,tarea1,tarea4])
+        expect(tareas_ordenadas_true).toEqual([tarea3,tarea2,tarea1, tarea4])
         
 
     })
@@ -87,21 +87,28 @@ describe('test clase ordenamiento', ()=> {
         const tarea1 = mock<Tarea>();
         const tarea2 = mock<Tarea>();
         const tarea3 = mock<Tarea>();
+        const tarea4 = mock<Tarea>();
+        const tarea5 = mock<Tarea>();
+        const tarea6 = mock<Tarea>();
         
 
-        tarea1.getPrioridad.mockReturnValue(prioridad.alta);
-        tarea2.getPrioridad.mockReturnValue(prioridad.baja);
-        tarea3.getPrioridad.mockReturnValue(prioridad.media);
+        tarea1.getPrioridad.mockReturnValue(2);
+        tarea2.getPrioridad.mockReturnValue(0);
+        tarea3.getPrioridad.mockReturnValue(1);
+        tarea4.getPrioridad.mockReturnValue(0);
+        tarea5.getPrioridad.mockReturnValue(0);
+        tarea6.getPrioridad.mockReturnValue(2);
+
         
 
 
-        const tareas = [tarea1, tarea2, tarea3];
+        const tareas = [tarea1, tarea2, tarea3, tarea4, tarea5, tarea6];
         
         const tareas_ordenadas_true = ordenamiento.ordenarPorPrioridad(tareas, true)
         //const tareas_ordenadas_false = tareas.sort((a, b) => a.getTitulo().localeCompare(b.getTitulo()));
 
 
-        expect(tareas_ordenadas_true).toEqual([tarea2,tarea3,tarea1])
+        expect(tareas_ordenadas_true).toEqual([tarea2,tarea4,tarea5, tarea3, tarea1, tarea6])
 
 
     })

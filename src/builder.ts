@@ -26,7 +26,7 @@ interface Builder {
      * Configura la fecha de vencimiento de la tarea a construir.
      * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea a construir.
      */
-    setFechaVencimiento(fechaVencimiento: Date): void;
+    setFechaVencimiento(fechaVencimiento: string): void;
 
     /**
      * Configura la prioridad de la tarea a construir.
@@ -45,6 +45,11 @@ interface Builder {
      * @param {string[]} etiquetas - Las etiquetas de la tarea a construir.
      */
     setEtiquetas(etiquetas: string[]): void;
+
+
+    setFechaCreacion(fechaCreacion: string): void;
+
+    setFechaFinalizacion(fechaFinalizacion: string): void;
 
     /**
      * Construye y retorna la tarea.

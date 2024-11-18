@@ -2,37 +2,29 @@ import Tarea from "./tarea";
 import Director from "./director";
 import ConstructorTarea from "./constructorTarea";
 import ToDoLista from "./toDoList";
+import Persistencia from "./persistencia/persistencia";
+import { Busqueda } from "./busqueda";
+import CalculadoraEstadistica from "./calculadoraEstadistica";
+import Ordenamiento from "./ordenamiento";
 
 // Create instances
 const constructor = new ConstructorTarea();
 const lista = new ToDoLista();
 const director = new Director(constructor, lista);
+const persistencia = new Persistencia(constructor,lista,director);
+const ordenamiento = new Ordenamiento();
+const busqueda = new Busqueda();
+const calculadora = new CalculadoraEstadistica();
 
-// Use the director to construct a Tarea
-constructor.setTitulo("prueba") 
-.setDescripcion("probando")
-.setFechaVencimiento(new Date("2022-11-05"))
-.setPrioridad(1)
-.setCategoria(1)
-.setCompletado(true);
-director.construirTarea();
+async function main() {
+    await persistencia.obtenerBaseDeDatos()
+    
+    
 
-constructor.setTitulo("segunda tarea") 
-.setDescripcion("prueba de tarea 2")
-.setFechaVencimiento(new Date("2021-10-03"))
-.setPrioridad(0)
-.setCategoria(0);
-director.construirTarea();
 
-console.log("-----------------------")
-lista.getTarea("prueba")?.agregarEtiqueta("prueba");
-lista.getTarea("prueba")?.agregarEtiqueta("prueba 2");
-console.log(lista);
-console.log("-----------------------")
-lista.getTarea("prueba")?.borrarEtiqueta("prueba");
-console.log(lista.getListaTareas());
-let pruebaError = lista.getTarea("prueba 2")?.borrarEtiqueta("prueba");
-console.log(pruebaError);
+    persistencia.guardarBaseDeDatos(JSON.stringify(lista.getListaTareas()))
+}
 
-lista.borrarPorTitulo("prueba");
-console.log(lista);
+
+main()
+

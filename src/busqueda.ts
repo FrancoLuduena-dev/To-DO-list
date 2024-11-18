@@ -1,6 +1,7 @@
 import Tarea from "./tarea";
 import { prioridad } from "./enums";
-
+import ToDoLista from "./toDoList";
+/*
 /**
  * Busqueda
  * @description clase para realizar busquedas
@@ -8,11 +9,9 @@ import { prioridad } from "./enums";
 
 
 export class Busqueda {
-    private tareas: Tarea[];
+    
 
-    constructor(tareas: Tarea[]){
-        this.tareas = tareas;
-    }
+    
 
 /**
  * Metodo para buscar una tarea por titulo ingresado
@@ -21,8 +20,8 @@ export class Busqueda {
  * @returns {Tarea} devuelve la tarea que coincida con el titulo
  */
     // BUSQUEDA POR TITULO
-    busquedaPorTitulo(titulo: string): Tarea[]{
-        return  this.tareas.filter(tarea => 
+    public busquedaPorTitulo(tareas:Tarea[], titulo: string): Tarea[]{
+        return  tareas.filter(tarea => 
             tarea.getTitulo().toLowerCase().includes(titulo.toLowerCase()));
     }
    
@@ -39,11 +38,13 @@ export class Busqueda {
    
    
     // BUSQUEDA POR FECHA DE VENCIMIENTO
-    buscarPorFechaDeVencimiento(fecha: Date): Tarea[] {
-        return this.tareas.filter(tarea => {
+    public buscarPorFechaDeVencimiento(tareas: Tarea[],fecha: Date): Tarea[] {
+        
+        
+        return tareas.filter(tarea => {
             const tareaFecha = tarea.getFechaVencimiento();
-            
-            // Verifigo si la fecha de vencimiento es null
+            console.log(tarea.getFechaVencimiento() === fecha)
+            // Verifico si la fecha de vencimiento es null
             if(tareaFecha === null) return false;
 
             return (
@@ -65,7 +66,7 @@ export class Busqueda {
     
     
     
-    busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[] {
+    public busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[] {
         return tareas.filter(tarea => 
             tarea.getEtiquetas().some(etiquetaTarea => 
                 etiquetaTarea.toLowerCase() === etiqueta.toLowerCase()
@@ -73,3 +74,4 @@ export class Busqueda {
         );
     
 }}
+

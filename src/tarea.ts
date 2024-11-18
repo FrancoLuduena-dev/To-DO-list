@@ -23,7 +23,7 @@ class Tarea {
     /**
      * @type {Date} La fecha de creación de la tarea.
      */
-    private fechaCreacion: Date = new Date();
+    private fechaCreacion: Date  = new Date();
 
     /**
      * @type {Date | null} La fecha que la tarea fue marcada como finalizada.
@@ -121,7 +121,7 @@ class Tarea {
      * Devuelve la prioridad de la tarea.
      * @returns {prioridad | null} La prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
      */
-    public getPrioridad(): prioridad | null {
+    public getPrioridad(): number | null {
         return this.prioridad;
     }
 
@@ -177,15 +177,22 @@ class Tarea {
      * Configura la fecha de vencimiento de la tarea.
      * @param {Date | null} fechaVencimiento - La nueva fecha de vencimiento de la tarea.
      */
-    public setFechaVencimiento(fechaVencimiento: Date | null): void {
-        this.fechaVencimiento = fechaVencimiento;
+    public setFechaVencimiento(fechaVencimiento: string | null): void {
+        if (fechaVencimiento === null) {
+            let fechita = fechaVencimiento
+            this.fechaVencimiento = fechita
+        }else{
+
+            let fechita = new Date(fechaVencimiento)
+            this.fechaVencimiento = fechita
+            }
     }
 
     /**
      * Configura la prioridad de la tarea.
      * @param {prioridad} prioridad - La nueva prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
      */
-    public setPrioridad(prioridad: prioridad): void {
+    public setPrioridad(prioridad: prioridad | null): void {
         this.prioridad = prioridad;
     }
 
@@ -196,7 +203,9 @@ class Tarea {
     public setCompletado(completado: boolean): void {
         this.completado = completado;
         if (this.completado && this.porcentajeAvance !== 100) {
-            this.fechaFinalizacion = new Date();
+            if (!this.fechaFinalizacion) {
+                //this.fechaFinalizacion = JSON.stringify(new Date());
+                            }
             this.setPorcentajeAvance(100);
         }
     }
@@ -209,7 +218,9 @@ class Tarea {
         this.porcentajeAvance = porcentajeAvance;
         if (this.porcentajeAvance === 100 && !this.completado) {
             this.setCompletado(true);
-            this.fechaFinalizacion = new Date();
+            if (!this.fechaFinalizacion) {
+                //this.fechaFinalizacion = JSON.stringify(new Date());
+                                        }
         }
     }
 
@@ -217,7 +228,7 @@ class Tarea {
      * Configura la categoría de la tarea.
      * @param {categoria} categoria - La nueva categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      */
-    public setCategoria(categoria: categoria): void {
+    public setCategoria(categoria: categoria | null): void {
         this.categoria = categoria;
     }
 
@@ -256,6 +267,24 @@ class Tarea {
             }
         }
     }
+
+    public setFechaCreacion(fecha: string): void {
+        let fechita = new Date(fecha)
+        this.fechaCreacion = fechita;
+    }
+
+    public setFechaFinalizacion(fecha: string | null): void {
+        if (fecha === null) {
+            let fechita = fecha
+            this.fechaFinalizacion = fechita
+        }else{
+
+            let fechita = new Date(fecha)
+            this.fechaFinalizacion = fechita
+            }
+        
+    }
+
 }
 
 export { Tarea };
