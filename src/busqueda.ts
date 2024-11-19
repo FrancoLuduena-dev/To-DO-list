@@ -9,44 +9,34 @@ import ToDoLista from "./toDoList";
 
 
 export class Busqueda {
-    private tareas: Tarea[];
-
-    constructor(tareas: Tarea[]){
-        this.tareas = tareas;
-    }
-
-    /**
-     * Metodo para buscar una tarea por titulo ingresado
-     * @param {string} titulo Titulo de la tarea
-     * 
-     * @returns {Tarea} devuelve la tarea que coincida con el titulo
-     */
-
-
+    
+/**
+ * Metodo para buscar una tarea por titulo ingresado
+ * @param {string} titulo Titulo de la tarea
+ * 
+ * @returns {Tarea} devuelve la tarea que coincida con el titulo
+ */
     // BUSQUEDA POR TITULO
-    busquedaPorTitulo(titulo: string): Tarea[]{
-        return  this.tareas.filter(tarea => 
+    public busquedaPorTitulo(tareas:Tarea[], titulo: string): Tarea[]{
+        return  tareas.filter(tarea => 
             tarea.getTitulo().toLowerCase().includes(titulo.toLowerCase()));
     }
 
-
-
-    /**
-  * Metodo para buscar una tarea por fecha de vencimiento
-  * @param {Date}  fecha Fecha que se desea buscar una tarea
-  * 
-  * @returns {Tarea[]} Devuelve las tareas que coincidan con la fecha en formato array
-  */
-
-
-
-
+/**
+ * Metodo para buscar una tarea por fecha de vencimiento
+ * @param {Date}  fecha Fecha que se desea buscar una tarea
+ * 
+ * @returns {Tarea[]} Devuelve las tareas que coincidan con la fecha en formato array
+ */
+   
     // BUSQUEDA POR FECHA DE VENCIMIENTO
-    buscarPorFechaDeVencimiento(fecha: Date): Tarea[] {
-        return this.tareas.filter(tarea => {
+    public buscarPorFechaDeVencimiento(tareas: Tarea[],fecha: Date): Tarea[] {
+        
+        
+        return tareas.filter(tarea => {
             const tareaFecha = tarea.getFechaVencimiento();
-            
-            // Verifigo si la fecha de vencimiento es null
+            console.log(tarea.getFechaVencimiento() === fecha)
+            // Verifico si la fecha de vencimiento es null
             if(tareaFecha === null) return false;
 
             return (
@@ -56,8 +46,7 @@ export class Busqueda {
             );
         });
     }
-
-
+    
     /**
      * Metodo para realizar una busqueda basada en una etiqueta en particular
      * 
@@ -66,9 +55,7 @@ export class Busqueda {
      * @returns {Tarea} Devuelve un array de tareas que cumplan con la etiqueta pasada por parametro
      */
     
-    
-    
-    busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[] {
+    public busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[] {
         return tareas.filter(tarea => 
             tarea.getEtiquetas().some(etiquetaTarea => 
                 etiquetaTarea.toLowerCase() === etiqueta.toLowerCase()
@@ -76,3 +63,4 @@ export class Busqueda {
         );
     
 }}
+

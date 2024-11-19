@@ -53,6 +53,24 @@ class Director #TECHNOLOGY;header:444 {
     + construirTarea(configurar: () => void): Tarea;
 }
 
+class ModificadorTarea #TECHNOLOGY;header:444{
+    - tarea: Tarea
+    + ModificadorTarea(tarea: Tarea)
+    + setTarea(tareaAModificar: Tarea): this
+    + setTitulo(titulo: string): this
+    + setDescripcion(descripcion: string): this
+    + setFechaCreacion(fechaCreacion: Date): this
+    + setFechaVencimiento(fechaVencimiento: Date | null): this
+    + setFechaFinalizacion(fechaFinalizacion: Date | null): this
+    + setPrioridad(prioridad: prioridad | null): this
+    + setCompletado(completado: boolean): this
+    + setPorcentajeAvance(porcentaje: number): this
+    + setCategoria(categoria: categoria | null): this
+    + setEtiquetas(etiquetas: string[]): this
+    + agregarEtiqueta(etiqueta: string): this
+    + borrarEtiqueta(etiqueta: string): this
+}
+
 enum prioridad #LightSalmon;header:444{
     baja,
     media,
@@ -129,6 +147,7 @@ exception EtiquetaInexistenteError #LightCoral;header:444{}
     ToDoLista .d.> Ordenamiento
     ToDoLista .d.> Persistencia
     Director .r.> Builder
+    ModificadorTarea .r.> Tarea
 'notas
 'diseño
         'colores de clases

@@ -7,6 +7,7 @@ import { Busqueda } from "./busqueda";
 import CalculadoraEstadistica from "./calculadoraEstadistica";
 import Ordenamiento from "./ordenamiento";
 import { categoria, prioridad } from "./enums";
+import ModificadorTarea from "./persistencia/modificadorTarea";
 
 // Crear Instancias
 const constructor = new ConstructorTarea();
@@ -17,10 +18,12 @@ const ordenamiento = new Ordenamiento();
 const busqueda = new Busqueda();
 const calculadora = new CalculadoraEstadistica();
 
+
 async function main() {
     await persistencia.obtenerBaseDeDatos();
 
     // Ejemplo de creacion de Tarea con el Director
+
     director.construirTarea(() => {
         constructor.setTitulo("Tarea 1")
             .setDescripcion("Descripción de la Tarea 1")
@@ -34,12 +37,20 @@ async function main() {
 
     console.log(lista.getListaTareas());
     console.log("#################################3")
-    
-    // Ejemplo de modificaciones de Tarea
-    let tarea = lista.getTarea("Tarea 1");
-    tarea?.setCompletado(true);
-    console.log(lista.getTarea("Tarea 1"));
 
+    // Ejemplo de modificaciones de Tarea
+
+    let tareaModificable = lista.getTarea("Tarea 1")!;
+    console.log(tareaModificable);
+    let modificador = new ModificadorTarea(tareaModificable);
+    modificador.setTarea(tareaModificable);
+    modificador.setTitulo("Nuevo titulo Tarea1")
+        .setCategoria(categoria.Personal)
+        .agregarEtiqueta("nueva etiqueta")
+        .borrarEtiqueta("urgente");
+    console.log("Tarea modificada \n", tareaModificable);
+    console.log("###############################")
+    console.log(lista.getListaTareas());
 
     persistencia.guardarBaseDeDatos(JSON.stringify(lista.getListaTareas()));
 }
