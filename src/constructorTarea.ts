@@ -18,14 +18,14 @@ class ConstructorTarea implements Builder {
      * Inicializa una nueva instancia de Tarea con parametros vacios.
      */
     constructor() {
-        this.tarea = new Tarea("", "", null, null, null);
+        this.tarea = new Tarea("", "");
     }
 
     /**
      * Reinicia la tarea actual con una nueva instancia de Tarea.
      */
     public reset(): void {
-        this.tarea = new Tarea("", "", null, null, null);
+        this.tarea = new Tarea("", "");
     }
 
     /**
@@ -49,21 +49,42 @@ class ConstructorTarea implements Builder {
     }
 
     /**
+     * Configura la fecha que una tarea fue creada (solo para persistencia, no se debe usar en la creacion de tareas, ya que es automatica).
+     * @param {Date} fechaCreacion - La fecha de creacion de la tarea  en construccion.
+     * @returns La instancia actual de ConstructorTarea para poder concatenar.
+     */
+    public setFechaCreacion(fechaCreacion: Date): this {
+        this.tarea.setFechaCreacion(fechaCreacion)
+        return this;
+    }
+
+    /**
      * Configura la fecha de vencimiento de la tarea en construccion.
      * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setFechaVencimiento(fechaVencimiento: Date): this {
+    public setFechaVencimiento(fechaVencimiento: Date | null): this {
         this.tarea.setFechaVencimiento(fechaVencimiento);
         return this;
     }
+
+    /**
+     * Configura la fecha que una tarea es marcada como completada (solo para persistencia, no se debe usar en la creacion de tareas, ya que es automatica).
+     * @param {Date} fechaFinalizacion - La fecha de finalizacion de la tarea.
+     * @returns La instancia actual de ConstructorTarea para poder concatenar.
+     */
+    public setFechaFinalizacion(fechaFinalizacion: Date | null): this {
+        this.tarea.setFechaFinalizacion(fechaFinalizacion)
+        return this;
+    }
+
 
     /**
      * Configura la prioridad de la tarea en construccion.
      * @param {prioridad} prioridad - La prioridad de la tarea  en construccion ("baja = 0, "media" = 1 y "alta" = 2").
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setPrioridad(prioridad: prioridad): this {
+    public setPrioridad(prioridad: prioridad | null): this {
         this.tarea.setPrioridad(prioridad);
         return this;
     }
@@ -93,18 +114,18 @@ class ConstructorTarea implements Builder {
      * @param {categoria} categoria - La categoría de la tarea en construccion ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setCategoria(categoria: categoria): this {
+    public setCategoria(categoria: categoria | null): this {
         this.tarea.setCategoria(categoria);
         return this;
     }
 
     /**
      * Configura las etiquetas personalidas por el usuario de la tarea en construccion.
-     * @param {string[]} etiqueta - Las etiquetas personalidas por el usuario de la tarea en construccion.
+     * @param {string[]} etiquetas - Las etiquetas personalidas por el usuario de la tarea en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setEtiquetas(etiqueta: string[]): this {
-        this.tarea.setEtiquetas(etiqueta);
+    public setEtiquetas(etiquetas: string[]): this {
+        this.tarea.setEtiquetas(etiquetas);
         return this;
     }
 
@@ -113,8 +134,11 @@ class ConstructorTarea implements Builder {
      * @returns {Tarea} La tarea construida.
      */
     public construirTarea(): Tarea {
-        return this.tarea;
+        let resultado = this.tarea;
+        this.reset()
+        return resultado;
     }
+
 }
 
 export { ConstructorTarea };

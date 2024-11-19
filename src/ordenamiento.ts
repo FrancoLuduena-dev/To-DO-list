@@ -1,40 +1,20 @@
 import tarea, { Tarea } from "./tarea";
 
 class Ordenamiento {
-    // este flag booleano decide si el orden se hace de mayor a menor o menor a mayor
-    // true == menor a mayor
-    // flase == mayor a menor
-    public ordenarPorFecha(
-        listaDesordenada: Array<tarea>,
-        ascendiente: boolean
-    ): Array<tarea> {
-        // ordena la fecha en base a el flag booleano, si es ascendiente o no
+    ordenarPorFecha(listaDesordenada: Array<Tarea>, ascendiente: boolean): Array<Tarea> {
         return listaDesordenada.sort((a, b) => {
             const fechaA = a.getFechaVencimiento();
             const fechaB = b.getFechaVencimiento();
 
-            // Casos en el que la fecha es Null
-            if (fechaA === null && fechaB === null) return 0;
-            if (fechaA === null) return ascendiente ? 1 : -1;
-            if (fechaB === null) return ascendiente ? -1 : 1;
+            // Casos donde las fechas son null
+            if (fechaA === null && fechaB === null) return 0; // Ambas fechas son null, no importa el orden
+            if (fechaA === null) return ascendiente ? 1 : -1; // FechaA null va al final (ascendente) o al inicio (descendente)
+            if (fechaB === null) return ascendiente ? -1 : 1; // FechaB null va al final (ascendente) o al inicio (descendente)
 
-            if (ascendiente === true) {
-                if (fechaA.getFullYear() !== fechaB.getFullYear()) {
-                    return fechaA.getFullYear() - fechaB.getFullYear();
-                } else if (fechaA.getMonth() !== fechaB.getMonth()) {
-                    return fechaA.getMonth() - fechaB.getMonth();
-                } else {
-                    return fechaA.getDate() - fechaB.getDate();
-                }
-            } else {
-                if (fechaA.getFullYear() !== fechaB.getFullYear()) {
-                    return fechaB.getFullYear() - fechaA.getFullYear();
-                } else if (fechaA.getMonth() !== fechaB.getMonth()) {
-                    return fechaB.getMonth() - fechaA.getMonth();
-                } else {
-                    return fechaB.getDate() - fechaA.getDate();
-                }
-            }
+            // Comparación normal si ambas fechas son válidas
+            const tiempoA = fechaA.getTime();
+            const tiempoB = fechaB.getTime();
+            return ascendiente ? tiempoA - tiempoB : tiempoB - tiempoA;
         });
     }
 
@@ -51,20 +31,26 @@ class Ordenamiento {
     // ordena por prioridad con el metodo sort
     public ordenarPorPrioridad(
         listaDesordenada: Tarea[],
-        ascendente: boolean
+        ascendiente: boolean
     ): Tarea[] {
         return listaDesordenada.sort((a, b) => {
-            const prioridadA = a.getPrioridad();
-            const prioridadB = b.getPrioridad();
+            const prioridadA = a.getPrioridad(); // Asegúrate de que este atributo exista
+            const prioridadB = b.getPrioridad(); // Asegúrate de que este atributo exista
 
-            // Manejo de casos donde la prioridad puede ser null
-            if (prioridadA === null && prioridadB === null) return 0;
-            if (prioridadA === null) return ascendente ? 1 : -1;
-            if (prioridadB === null) return ascendente ? -1 : 1;
+            // Manejo de casos donde la prioridad es null
+            if (prioridadA === null && prioridadB === null) return 0; // Ambos son null
+            if (prioridadA === null) return ascendiente ? 1 : -1; // A es null, B no
+            if (prioridadB === null) return ascendiente ? -1 : 1; // B es null, A no
 
-            return ascendente ? prioridadA - prioridadB : prioridadB - prioridadA;
+            // Comparar las prioridades
+            if (ascendiente) {
+                return prioridadA - prioridadB; // Orden ascendente
+            } else {
+                return prioridadB - prioridadA; // Orden descendente
+            }
         });
     }
+
     public ordenarPorEtiquetas(
         listaDesordenada: Array<tarea>,
         ascendente: boolean

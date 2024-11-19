@@ -2,37 +2,46 @@ import Tarea from "./tarea";
 import Director from "./director";
 import ConstructorTarea from "./constructorTarea";
 import ToDoLista from "./toDoList";
+import Persistencia from "./persistencia/persistencia";
+import { Busqueda } from "./busqueda";
+import CalculadoraEstadistica from "./calculadoraEstadistica";
+import Ordenamiento from "./ordenamiento";
+import { categoria, prioridad } from "./enums";
 
-// Create instances
+// Crear Instancias
 const constructor = new ConstructorTarea();
 const lista = new ToDoLista();
 const director = new Director(constructor, lista);
+const persistencia = new Persistencia(constructor, lista, director);
+const ordenamiento = new Ordenamiento();
+const busqueda = new Busqueda();
+const calculadora = new CalculadoraEstadistica();
 
-// Use the director to construct a Tarea
-constructor.setTitulo("prueba") 
-.setDescripcion("probando")
-.setFechaVencimiento(new Date("2022-11-05"))
-.setPrioridad(1)
-.setCategoria(1)
-.setCompletado(true);
-director.construirTarea();
+async function main() {
+    await persistencia.obtenerBaseDeDatos();
 
-constructor.setTitulo("segunda tarea") 
-.setDescripcion("prueba de tarea 2")
-.setFechaVencimiento(new Date("2021-10-03"))
-.setPrioridad(0)
-.setCategoria(0);
-director.construirTarea();
+    // Ejemplo de creacion de Tarea con el Director
+    director.construirTarea(() => {
+        constructor.setTitulo("Tarea 1")
+            .setDescripcion("Descripción de la Tarea 1")
+            .setFechaVencimiento(new Date("2021/11/22"))
+            .setPrioridad(prioridad.alta)
+            .setCompletado(false)
+            .setPorcentajeAvance(25)
+            .setCategoria(categoria.Trabajo)
+            .setEtiquetas(["importante", "urgente"]);
+    });
 
-console.log("-----------------------")
-lista.getTarea("prueba")?.agregarEtiqueta("prueba");
-lista.getTarea("prueba")?.agregarEtiqueta("prueba 2");
-console.log(lista);
-console.log("-----------------------")
-lista.getTarea("prueba")?.borrarEtiqueta("prueba");
-console.log(lista.getListaTareas());
-let pruebaError = lista.getTarea("prueba 2")?.borrarEtiqueta("prueba");
-console.log(pruebaError);
+    console.log(lista.getListaTareas());
+    console.log("#################################3")
+    
+    // Ejemplo de modificaciones de Tarea
+    let tarea = lista.getTarea("Tarea 1");
+    tarea?.setCompletado(true);
+    console.log(lista.getTarea("Tarea 1"));
 
-lista.borrarPorTitulo("prueba");
-console.log(lista);
+
+    persistencia.guardarBaseDeDatos(JSON.stringify(lista.getListaTareas()));
+}
+
+main();

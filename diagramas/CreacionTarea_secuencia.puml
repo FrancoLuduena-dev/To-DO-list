@@ -1,0 +1,70 @@
+@startuml Creacion de Tarea
+'diseño
+skinparam Guillemet false
+actor Usuario #LightBlue
+participant Director << (C,#ADD1B2)>> #TECHNOLOGY 
+participant ConstructorTarea << (C,#ADD1B2)>> #TECHNOLOGY 
+participant Tarea << (C,#ADD1B2)>> #TECHNOLOGY 
+participant ToDoLista << (C,#ADD1B2)>> #TECHNOLOGY 
+
+
+Usuario -> Director: construirTarea(configurar)
+activate Director #LightSteelBlue
+
+Director -> ConstructorTarea: setTitulo("Tarea 1")
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setDescripcion("Descripción de la Tarea 1")
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setFechaVencimiento(new Date("2021/11/22"))
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setPrioridad(prioridad.alta)
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setCompletado(false)
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setPorcentajeAvance(25)
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setCategoria(categoria.Trabajo)
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: setEtiquetas(["importante", "urgente"])
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea --> Director: this
+deactivate ConstructorTarea
+
+Director -> ConstructorTarea: construir()
+activate ConstructorTarea #LightSteelBlue
+ConstructorTarea -> Tarea: new Tarea()
+activate Tarea #LightSteelBlue
+Tarea -> Tarea: fechaCreacion
+Tarea --> Director: Tarea
+deactivate Tarea
+deactivate ConstructorTarea
+
+Director -> ToDoLista: agregarTarea(Tarea)
+activate ToDoLista #LightSteelBlue
+ToDoLista --> Director: void
+deactivate ToDoLista
+
+Director --> Usuario: Tarea
+deactivate Director
+@enduml

@@ -1,4 +1,4 @@
-import { Busqueda } from "./busqueda";
+//import { Busqueda } from "./busqueda";
 import TareaInexistenteError from "./exception/tarea-inexistente-error";
 import Tarea from "./tarea";
 
@@ -137,6 +137,10 @@ class ToDoLista {
      */
     public getTarea(titulo: string): Tarea | undefined {
         return this.listaTareas.find(tarea => tarea.getTitulo() === titulo);
+    }
+
+    public setListaTareas(listaTareas: Tarea[]): void {
+        this.listaTareas = listaTareas;
     }
 
 }

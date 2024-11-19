@@ -16,24 +16,26 @@ class Tarea {
     private descripcion: string;
 
     /**
-     * @type {Date | null} La fecha de vencimiento de la tarea.
-     */
-    private fechaVencimiento: Date | null;
-
-    /**
      * @type {Date} La fecha de creación de la tarea.
      */
     private fechaCreacion: Date = new Date();
 
+
+    /**
+     * @type {Date | null} La fecha de vencimiento de la tarea.
+     */
+    private fechaVencimiento: Date | null = null;
+
+
     /**
      * @type {Date | null} La fecha que la tarea fue marcada como finalizada.
      */
-    private fechaFinalizacion: Date | null = null;
+    private fechaFinalizacion: Date | null;
 
     /**
      * @type {prioridad | null} La prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
      */
-    private prioridad: prioridad | null;
+    private prioridad: prioridad | null = null;
 
     /**
      * @type {boolean} Indica si la tarea está completada ("true" si está completada la tarea y "false" si no lo está).
@@ -48,7 +50,7 @@ class Tarea {
     /**
      * @type {categoria | null} La categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      */
-    private categoria: categoria | null;
+    private categoria: categoria | null = null;
 
     /**
      * @type {string[]} Las etiquetas de la tarea.
@@ -59,22 +61,14 @@ class Tarea {
      * Constructor de la clase Tarea.
      * @param {string} titulo - El título de la tarea.
      * @param {string} descripcion - La descripción de la tarea.
-     * @param {Date | null} fechaVencimiento - La fecha de vencimiento de la tarea.
-     * @param {prioridad | null} prioridad - La prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
-     * @param {categoria | null} categoria - La categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
-     */
+      */
     constructor(
-        titulo: string, 
-        descripcion: string, 
-        fechaVencimiento: Date | null, 
-        prioridad: prioridad | null, 
-        categoria: categoria | null,
+        titulo: string,
+        descripcion: string,
     ) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaVencimiento = fechaVencimiento;
-        this.prioridad = prioridad;
-        this.categoria = categoria;
+        this.fechaFinalizacion = null;
     }
 
     /**
@@ -121,7 +115,7 @@ class Tarea {
      * Devuelve la prioridad de la tarea.
      * @returns {prioridad | null} La prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
      */
-    public getPrioridad(): prioridad | null {
+    public getPrioridad(): number | null {
         return this.prioridad;
     }
 
@@ -178,14 +172,38 @@ class Tarea {
      * @param {Date | null} fechaVencimiento - La nueva fecha de vencimiento de la tarea.
      */
     public setFechaVencimiento(fechaVencimiento: Date | null): void {
-        this.fechaVencimiento = fechaVencimiento;
+        if (fechaVencimiento === null) {
+            this.fechaVencimiento = null;
+        } else {
+            this.fechaVencimiento = new Date(fechaVencimiento);
+        }
+    }
+
+    /**
+     * Configura la fecha de creacion de la tarea.
+     * @param {Date} fechaCreacion - La nueva fecha de vencimiento de la tarea.
+     */
+    public setFechaCreacion(fechaCreacion: Date): void {
+        this.fechaCreacion = new Date(fechaCreacion)
+    }
+
+    /**
+     * Configura la fecha que la tarea fue marcada como finalizada.
+     * @param {Date | null} fechaFinalizacion - La fecha de finalizado de la tarea.
+     */
+    public setFechaFinalizacion(fecha: Date | null): void {
+        if (fecha === null) {
+            this.fechaFinalizacion = null;
+        } else {
+            this.fechaFinalizacion = new Date(fecha);
+        }
     }
 
     /**
      * Configura la prioridad de la tarea.
      * @param {prioridad} prioridad - La nueva prioridad de la tarea ("baja = 0, "media" = 1 y "alta" = 2").
      */
-    public setPrioridad(prioridad: prioridad): void {
+    public setPrioridad(prioridad: prioridad | null): void {
         this.prioridad = prioridad;
     }
 
@@ -196,8 +214,8 @@ class Tarea {
     public setCompletado(completado: boolean): void {
         this.completado = completado;
         if (this.completado && this.porcentajeAvance !== 100) {
-            this.fechaFinalizacion = new Date();
             this.setPorcentajeAvance(100);
+            this.setFechaFinalizacion(new Date());
         }
     }
 
@@ -209,7 +227,7 @@ class Tarea {
         this.porcentajeAvance = porcentajeAvance;
         if (this.porcentajeAvance === 100 && !this.completado) {
             this.setCompletado(true);
-            this.fechaFinalizacion = new Date();
+            this.setFechaFinalizacion(new Date());
         }
     }
 
@@ -217,7 +235,7 @@ class Tarea {
      * Configura la categoría de la tarea.
      * @param {categoria} categoria - La nueva categoría de la tarea ( "Trabajo" = 0, "Personal" = 1, "Familia" = 2 y "Estudio" = 3).
      */
-    public setCategoria(categoria: categoria): void {
+    public setCategoria(categoria: categoria | null): void {
         this.categoria = categoria;
     }
 
