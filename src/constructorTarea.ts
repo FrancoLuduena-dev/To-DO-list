@@ -18,14 +18,14 @@ class ConstructorTarea implements Builder {
      * Inicializa una nueva instancia de Tarea con parametros vacios.
      */
     constructor() {
-        this.tarea = new Tarea("", "", null, null, null);
+        this.tarea = new Tarea("", "");
     }
 
     /**
      * Reinicia la tarea actual con una nueva instancia de Tarea.
      */
     public reset(): void {
-        this.tarea = new Tarea("", "", null, null, null);
+        this.tarea = new Tarea("", "");
     }
 
     /**
@@ -53,10 +53,31 @@ class ConstructorTarea implements Builder {
      * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setFechaVencimiento(fechaVencimiento: string | null): this {
+    public setFechaVencimiento(fechaVencimiento: Date | null): this {
         this.tarea.setFechaVencimiento(fechaVencimiento);
         return this;
     }
+
+    /**
+     * Configura la fecha que una tarea fue creada (solo para persistencia, no se debe usar en la creacion de tareas, ya que es automatica).
+     * @param {Date} fechaCreacion - La fecha de creacion de la tarea  en construccion.
+     * @returns La instancia actual de ConstructorTarea para poder concatenar.
+     */
+    public setFechaCreacion(fechaCreacion: Date): this {
+        this.tarea.setFechaCreacion(fechaCreacion)
+        return this;
+    }
+
+    /**
+     * Configura la fecha que una tarea es marcada como completada (solo para persistencia, no se debe usar en la creacion de tareas, ya que es automatica).
+     * @param {Date} fechaFinalizacion - La fecha de finalizacion de la tarea.
+     * @returns La instancia actual de ConstructorTarea para poder concatenar.
+     */
+    public setFechaFinalizacion(fechaFinalizacion: Date | null): this {
+        this.tarea.setFechaFinalizacion(fechaFinalizacion)
+        return this;
+    }
+
 
     /**
      * Configura la prioridad de la tarea en construccion.
@@ -117,20 +138,6 @@ class ConstructorTarea implements Builder {
         this.reset()
         return resultado;
     }
-
-    public setFechaCreacion(fecha: string): this {
-        this.tarea.setFechaCreacion(fecha)
-
-        return this;
-    }
-
-    public setFechaFinalizacion(fecha: string | null): this {
-        this.tarea.setFechaFinalizacion(fecha)
-
-        return this;
-    }
-
-
 
 }
 

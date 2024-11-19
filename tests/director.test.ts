@@ -13,7 +13,7 @@ describe('Director', () => {
     beforeEach(() => {
         mockBuilder = mock<Builder>();
         mockLista = mock<ToDoLista>();
-        mockTarea = new Tarea('Test Tarea', 'Descripción de prueba', null,null, null);
+        mockTarea = new Tarea('Test Tarea', 'Descripción de prueba');
 
         mockBuilder.construirTarea.mockReturnValue(mockTarea);
 

@@ -10,15 +10,12 @@ describe("Test de clase Tarea", () => {
     const task = new Tarea(
       "Testear la app",
       "hay que testear que la app funcione",
-      date,
-      prioridad.baja,
-      categoria.Estudio
     );
 
     expect(task.getTitulo()).toBe("Testear la app");
     expect(task.getDescripcion()).toBe("hay que testear que la app funcione");
     expect(task.getFechaCreacion()).toEqual(date);
-    expect(task.getPrioridad()).toBe(prioridad.baja);
-    expect(task.getCategoria()).toBe(categoria.Estudio);
+    expect(task.getPrioridad()).toBe(null);
+    expect(task.getCategoria()).toBe(null);
   });
 });
