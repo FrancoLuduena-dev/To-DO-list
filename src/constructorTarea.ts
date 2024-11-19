@@ -49,22 +49,22 @@ class ConstructorTarea implements Builder {
     }
 
     /**
-     * Configura la fecha de vencimiento de la tarea en construccion.
-     * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
-     * @returns La instancia actual de ConstructorTarea para poder concatenar.
-     */
-    public setFechaVencimiento(fechaVencimiento: Date | null): this {
-        this.tarea.setFechaVencimiento(fechaVencimiento);
-        return this;
-    }
-
-    /**
      * Configura la fecha que una tarea fue creada (solo para persistencia, no se debe usar en la creacion de tareas, ya que es automatica).
      * @param {Date} fechaCreacion - La fecha de creacion de la tarea  en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
     public setFechaCreacion(fechaCreacion: Date): this {
         this.tarea.setFechaCreacion(fechaCreacion)
+        return this;
+    }
+
+    /**
+     * Configura la fecha de vencimiento de la tarea en construccion.
+     * @param {Date} fechaVencimiento - La fecha de vencimiento de la tarea  en construccion.
+     * @returns La instancia actual de ConstructorTarea para poder concatenar.
+     */
+    public setFechaVencimiento(fechaVencimiento: Date | null): this {
+        this.tarea.setFechaVencimiento(fechaVencimiento);
         return this;
     }
 
@@ -121,11 +121,11 @@ class ConstructorTarea implements Builder {
 
     /**
      * Configura las etiquetas personalidas por el usuario de la tarea en construccion.
-     * @param {string[]} etiqueta - Las etiquetas personalidas por el usuario de la tarea en construccion.
+     * @param {string[]} etiquetas - Las etiquetas personalidas por el usuario de la tarea en construccion.
      * @returns La instancia actual de ConstructorTarea para poder concatenar.
      */
-    public setEtiquetas(etiqueta: string[]): this {
-        this.tarea.setEtiquetas(etiqueta);
+    public setEtiquetas(etiquetas: string[]): this {
+        this.tarea.setEtiquetas(etiquetas);
         return this;
     }
 

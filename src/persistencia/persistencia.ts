@@ -55,18 +55,18 @@ class Persistencia {
         let fechaFin = objeto.fechaFinalizacion == null ? null : objeto.fechaFinalizacion;
         let fechaVencimiento = objeto.fechaVencimiento == null ? null : objeto.fechaVencimiento;
 
-        this.constructorTarea.setTitulo(objeto.titulo)
-          .setDescripcion(objeto.descripcion)
-          .setFechaVencimiento(fechaVencimiento)
-          .setFechaCreacion(fechaCreacion)
-          .setPrioridad(objeto.prioridad)
-          .setCompletado(objeto.completado)
-          .setPorcentajeAvance(objeto.porcentajeAvance)
-          .setCategoria(objeto.categoria)
-          .setEtiquetas(objeto.etiquetas)
-          .setFechaFinalizacion(fechaFin)
-
-        this.director.construirTarea()
+        this.director.construirTarea(() => {
+          this.constructorTarea.setTitulo(objeto.titulo)
+            .setDescripcion(objeto.descripcion)
+            .setFechaVencimiento(fechaVencimiento)
+            .setFechaCreacion(fechaCreacion)
+            .setPrioridad(objeto.prioridad)
+            .setCompletado(objeto.completado)
+            .setPorcentajeAvance(objeto.porcentajeAvance)
+            .setCategoria(objeto.categoria)
+            .setEtiquetas(objeto.etiquetas)
+            .setFechaFinalizacion(fechaFin)
+        })
 
       });
 

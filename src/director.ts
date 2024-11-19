@@ -38,7 +38,8 @@ class Director {
      * Construye una nueva tarea utilizando el constructor y la agrega a la lista.
      * @returns {Tarea} La tarea construida.
      */
-    public construirTarea(): Tarea {
+    public construirTarea(configurar: () => void): Tarea {
+        configurar();
         let resultado = this.builder.construirTarea();
         this.lista.agregarAListas(resultado);
         this.builder.reset();
