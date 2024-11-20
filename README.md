@@ -19,18 +19,18 @@ Aplicacion *backend* integradora para la materia **"Programacion ll"** en donde 
 
 2. Instala dependencias
 
-   ``bash
+   ``
 	npm run install``
 
 4. Ejecutar la aplicacion
 
-   ``bash
+   ``
 	npm run start    ``
 
 
 6. Para ejecutar los tests:
 
-   ``bash
+   ``
 	npm run test``
 
 Para mas informacion sobre  el funcionamiento de la app, consultar la documentacion en docs/index.html
