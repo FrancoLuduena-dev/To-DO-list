@@ -48,7 +48,6 @@ class ConstructorTarea #TECHNOLOGY;header:444 implements Builder {
 
 class Director #TECHNOLOGY;header:444 {
     - builder: Builder;
-    - lista: ToDoLista;
     + setBuilder(builder: Builder): void;
     + construirTarea(configurar: () => void): Tarea;
 }

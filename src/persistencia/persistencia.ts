@@ -55,7 +55,7 @@ class Persistencia {
         let fechaFin = objeto.fechaFinalizacion == null ? null : objeto.fechaFinalizacion;
         let fechaVencimiento = objeto.fechaVencimiento == null ? null : objeto.fechaVencimiento;
 
-        this.director.construirTarea(() => {
+        let tarea = this.director.construirTarea(() => {
           this.constructorTarea.setTitulo(objeto.titulo)
             .setDescripcion(objeto.descripcion)
             .setFechaVencimiento(fechaVencimiento)
@@ -67,6 +67,7 @@ class Persistencia {
             .setEtiquetas(objeto.etiquetas)
             .setFechaFinalizacion(fechaFin)
         })
+        this.lista.agregarAListas(tarea);
 
       });
 

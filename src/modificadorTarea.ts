@@ -1,5 +1,5 @@
-import { categoria, prioridad } from "../enums";
-import Tarea from "../tarea";
+import { categoria, prioridad } from "./enums";
+import Tarea from "./tarea";
 
 /**
  * Clase ConstructorTarea que implementa la interfaz Builder.

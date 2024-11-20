@@ -10,20 +10,14 @@ class Director {
     * @type {Builder} builder - El constructor a utilizar para crear las tareas.
      */
     private builder: Builder;
-    
-    /**
-    * @type {ToDoLista} lista - La lista de tareas a la que se agregarán las tareas.
-    */
-    private lista: ToDoLista;
+
 
     /**
      * El constructor de la clase Director.
      * @param {Builder} builder - El constructor a utilizar para crear las tareas.
-     * @param {ToDoLista} lista - La lista de tareas a la que se agregarán las tareas.
      */
-    constructor(builder: Builder, lista: ToDoLista) {
+    constructor(builder: Builder) {
         this.builder = builder;
-        this.lista = lista;
     }
 
     /**
@@ -41,7 +35,6 @@ class Director {
     public construirTarea(configurar: () => void): Tarea {
         configurar();
         let resultado = this.builder.construirTarea();
-        this.lista.agregarAListas(resultado);
         this.builder.reset();
         return resultado;
     }

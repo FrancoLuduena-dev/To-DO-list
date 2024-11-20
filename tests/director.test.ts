@@ -25,17 +25,17 @@ describe('Director', () => {
         mockBuilder.setCategoria.mockReturnThis();
         mockBuilder.setEtiquetas.mockReturnThis();
 
-        director = new Director(mockBuilder, mockLista);
+        director = new Director(mockBuilder);
     });
 
     test('setBuilder settea el builder', () => {
-        const director = new Director(mock<ConstructorTarea>(), {} as any);
+        const director = new Director(mock<ConstructorTarea>());
         const nuevoBuilder = mock<ConstructorTarea>();
         director.setBuilder(nuevoBuilder);
         expect((director as any).builder).toBe(nuevoBuilder);
     });
 
-    test('construirTarea construye una tarea y la agrega a la lista', () => {
+    test('construirTarea construye una tarea', () => {
         const configurar = () => {
             mockBuilder.setTitulo('Test Tarea')
                 .setDescripcion('Descripción de prueba')
@@ -48,6 +48,7 @@ describe('Director', () => {
         };
 
         const tarea = director.construirTarea(configurar);
+        mockLista.agregarAListas(tarea);
         expect(mockBuilder.construirTarea).toHaveBeenCalled();
         expect(mockLista.agregarAListas).toHaveBeenCalledWith(tarea);
         expect(mockBuilder.reset).toHaveBeenCalled();
