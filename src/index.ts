@@ -3,9 +3,7 @@ import Director from "./director";
 import ConstructorTarea from "./constructorTarea";
 import ToDoLista from "./toDoList";
 import Persistencia from "./persistencia/persistencia";
-import { Busqueda } from "./busqueda";
 import CalculadoraEstadistica from "./calculadoraEstadistica";
-import Ordenamiento from "./ordenamiento";
 import { categoria, prioridad } from "./enums";
 import ModificadorTarea from "./modificadorTarea";
 import BusquedaPorTitulo from "./busqueda/busquedaPorTitulo";
@@ -40,7 +38,7 @@ async function main() {
             .setCategoria(categoria.Trabajo)
             .setEtiquetas(["importante", "urgente"]);
     });
-    lista.agregarAListas(tareaACrear);
+    lista.agregarALista(tareaACrear);
 
     console.log(lista.getListaTareas());
     console.log("#################################");

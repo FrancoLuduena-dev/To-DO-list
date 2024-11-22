@@ -14,21 +14,21 @@ describe('ToDoLista', () => {
     });
 
     test('debería agregar una nueva tarea a la lista', () => {
-        todoLista.agregarAListas(mockTarea);
+        todoLista.agregarALista(mockTarea);
         expect(todoLista.getListaTareas()).toContain(mockTarea);
     });
 
     test('debería devolver la lista de tareas', () => {
         const tarea1 = new Tarea('Título 1', 'Descripción 1');
         const tarea2 = new Tarea('Título 2', 'Descripción 2');
-        todoLista.agregarAListas(tarea1);
-        todoLista.agregarAListas(tarea2);
+        todoLista.agregarALista(tarea1);
+        todoLista.agregarALista(tarea2);
         expect(todoLista.getListaTareas()).toEqual([tarea1, tarea2]);
     });
 
     test('debería borrar una tarea de la lista', () => {
-        todoLista.agregarAListas(mockTarea);
-        todoLista.borrarDeListas(mockTarea);
+        todoLista.agregarALista(mockTarea);
+        todoLista.borrarDeLista(mockTarea);
         expect(todoLista.getListaTareas()).not.toContain(mockTarea);
     });
 
@@ -38,64 +38,17 @@ describe('ToDoLista', () => {
     });
 
     test('debería devolver una tarea específica de la lista por su título', () => {
-        todoLista.agregarAListas(mockTarea);
+        todoLista.agregarALista(mockTarea);
         const tarea = todoLista.getTareaDeLista('Título de prueba');
         expect(tarea).toBe(mockTarea);
     });
 
-
-    test('debería devolver la lista de tareas completadas', () => {
-        const tarea1 = new Tarea('Título 1', 'Descripción 1');
-        const tarea2 = new Tarea('Título 2', 'Descripción 2');
-        tarea1.setCompletado(true);
-        todoLista.agregarAListas(tarea1);
-        todoLista.agregarAListas(tarea2);
-        expect(todoLista.getTareasCompletadas()).toEqual([tarea1]);
-    });
-
-    test('debería devolver la lista de tareas pendientes', () => {
-        const tarea1 = new Tarea('Título 1', 'Descripción 1');
-        const tarea2 = new Tarea('Título 2', 'Descripción 2');
-        tarea2.setCompletado(true);
-        todoLista.agregarAListas(tarea1);
-        todoLista.agregarAListas(tarea2);
-        expect(todoLista.getTareasPendientes()).toEqual([tarea1]);
-    });
 
     test('debería setear la lista de tareas', () => {
         const tarea1 = new Tarea('Título 1', 'Descripción 1');
         const tarea2 = new Tarea('Título 2', 'Descripción 2');
         todoLista.setListaTareas([tarea1, tarea2]);
         expect(todoLista.getListaTareas()).toEqual([tarea1, tarea2]);
-    });
-
-    
-    test('debería setear la lista de tareas completadas', () => {
-        const tarea1 = new Tarea('Título 1', 'Descripción 1');
-        const tarea2 = new Tarea('Título 2', 'Descripción 2');
-        tarea1.setCompletado(true);
-        todoLista.setListaTareas([tarea1, tarea2]);
-        todoLista.setListaTareasCompletadas();
-        expect(todoLista.getTareasCompletadas()).toEqual([tarea1]);
-    });
-
-    test('debería setear la lista de tareas completadas 2', () => {
-        const tarea1 = new Tarea('Título 1', 'Descripción 1');
-        const tarea2 = new Tarea('Título 2', 'Descripción 2');
-        tarea1.setCompletado(true);
-        todoLista.agregarAListas(tarea1);
-        todoLista.agregarAListas(tarea2);
-        todoLista.setListaTareasCompletadas();
-        expect(todoLista.getTareasCompletadas()).toEqual([tarea1]);
-    });
-
-    test('debería eliminar una tarea de la lista de tareas completadas', () => {
-        const tarea = new Tarea('Título de prueba', 'Descripción de prueba');
-        tarea.setCompletado(true);
-        todoLista.agregarAListas(tarea);
-        expect(todoLista.getTareasCompletadas()).toContain(tarea);
-        todoLista.borrarDeListas(tarea);
-        expect(todoLista.getTareasCompletadas()).not.toContain(tarea);
     });
 
 });
