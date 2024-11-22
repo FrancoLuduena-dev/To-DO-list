@@ -1,5 +1,5 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "entryPoints": ["./src/tarea.ts","./src/busqueda.ts" ],
+    "entryPoints": ["./src/**"],
     "out": "docs"
 }
