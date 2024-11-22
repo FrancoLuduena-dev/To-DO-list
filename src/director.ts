@@ -1,25 +1,40 @@
-import ConstructorTarea from "./constructorTarea";
-import { prioridad, categoria } from "./enums";
+import Builder from "./builder";
 import Tarea from "./tarea";
 import ToDoLista from "./toDoList";
 
+/**
+ * Clase Director que se encarga de construir tareas y agregarlas a una lista.
+ */
 class Director {
-    private builder: ConstructorTarea;
-    private lista: ToDoLista;
+    /**
+    * @type {Builder} builder - El constructor a utilizar para crear las tareas.
+     */
+    private builder: Builder;
 
-    constructor(builder: ConstructorTarea, lista: ToDoLista) {
+
+    /**
+     * El constructor de la clase Director.
+     * @param {Builder} builder - El constructor a utilizar para crear las tareas.
+     */
+    constructor(builder: Builder) {
         this.builder = builder;
-        this.lista = lista;
-        // aca se pone el tipo de builder, por ahora solo estoy creando uno, el ConstructorTarea
     }
 
-    public setBuilder(builder: ConstructorTarea): void {
+    /**
+     * Configura el constructor de tareas a utilizar.
+     * @param {Builder} builder - El nuevo constructor de tareas.
+     */
+    public setBuilder(builder: Builder): void {
         this.builder = builder;
     }
 
-    public construirTareaCompleta(): Tarea {
+    /**
+     * Construye una nueva tarea utilizando el constructor y la agrega a la lista.
+     * @returns {Tarea} La tarea construida.
+     */
+    public construirTarea(configurar: () => void): Tarea {
+        configurar();
         let resultado = this.builder.construirTarea();
-        this.lista.agregarALista(resultado);
         this.builder.reset();
         return resultado;
     }

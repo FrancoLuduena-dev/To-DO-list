@@ -1,73 +1,20 @@
 import Tarea from "./tarea";
-import { prioridad } from "./enums";
 
 /**
- * Busqueda
- * @description clase para realizar busquedas
- */
-
-
-export class Busqueda {
-    private tareas: Tarea[];
-
-    constructor(tareas: Tarea[]){
-        this.tareas = tareas;
-    }
-
-/**
- * Metodo para buscar una tarea por titulo ingresado
- * @param {string} titulo Titulo de la tarea
+ * Representa la funcionalidad de búsqueda de tareas.
  * 
- * @returns {Tarea} devuelve la tarea que coincida con el titulo
+ * @interface Busqueda
  */
-    // BUSQUEDA POR TITULO
-    busquedaPorTitulo(titulo: string): Tarea[]{
-        return  this.tareas.filter(tarea => 
-            tarea.getTitulo().toLowerCase().includes(titulo.toLowerCase()));
-    }
-   
-   
-   
-   /**
- * Metodo para buscar una tarea por fecha de vencimiento
- * @param {Date}  fecha Fecha que se desea buscar una tarea
- * 
- * @returns {Tarea[]} Devuelve las tareas que coincidan con la fecha en formato array
- */
-   
-   
-   
-   
-    // BUSQUEDA POR FECHA DE VENCIMIENTO
-    buscarPorFechaDeVencimiento(fecha: Date): Tarea[] {
-        return this.tareas.filter(tarea => {
-            const tareaFecha = tarea.getFechaVencimiento();
-            
-            // Verifigo si la fecha de vencimiento es null
-            if(tareaFecha === null) return false;
-
-            return (
-                tareaFecha.getFullYear() === fecha.getFullYear() &&
-                tareaFecha.getMonth() === fecha.getMonth() &&
-                tareaFecha.getDate() === fecha.getDate()
-            );
-        });
-    }
-    
-    
+interface Busqueda {
     /**
-     * Metodo para realizar una busqueda basada en una etiqueta en particular
+     * Realiza una búsqueda en un conjunto de tareas basado en un parámetro.
      * 
-     * @param {string} etiqueta Etiqueta que se desea buscar 
-     * 
-     * @returns {Tarea} Devuelve un array de tareas que cumplan con la etiqueta pasada por parametro
+     * @param tarea - Un array de instancias de Tarea.
+     * @param parametro - El criterio de búsqueda. Puede ser de cualquier tipo.
+     * @returns Un array de tareas que coinciden con el criterio de búsqueda.
      */
-    
-    
-    
-    busquedaPorEtiqueta(etiqueta: string): Tarea[] {
-        return this.tareas.filter(tarea => 
-            tarea.getEtiquetas().includes(etiqueta.toLowerCase()));
-    }
-    
+    buscar(tarea: Tarea[], parametro: any): Tarea[];
 }
+
+export { Busqueda };
+export default Busqueda;

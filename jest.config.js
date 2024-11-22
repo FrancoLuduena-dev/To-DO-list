@@ -23,6 +23,7 @@ module.exports = {
     //"default", 
     ["jest-compact-reporter", { diffs: false, colours: true, showPassingTests: true }],
     ["jest-junit", { outputDirectory: "coverage", usePathForSuiteName: true, reportedFilePath: "absolute" }],
+    
   ],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: './tsconfig.json' }],
