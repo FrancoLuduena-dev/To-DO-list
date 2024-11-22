@@ -21,7 +21,7 @@ const busquedaPorEtiquetas = new BusquedaPorEtiqueta();
 const busquedaPorVencimiento = new BusquedaPorVencimiento();
 
 async function main() {
-    await persistencia.obtenerBaseDeDatos();
+    await persistencia.obtenerBaseDeDatos(); //Se levantan los datos cuando inicia la app
 
     console.log(lista.getListaTareas());
     console.log("#################################");
@@ -85,7 +85,7 @@ async function main() {
 
 
 
-    persistencia.guardarBaseDeDatos(JSON.stringify(lista.getListaTareas()));
+    persistencia.guardarBaseDeDatos(JSON.stringify(lista.getListaTareas())); //Se persisten los datos actualizados
 }
 
 main();
