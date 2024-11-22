@@ -67,7 +67,7 @@ class Persistencia {
             .setEtiquetas(objeto.etiquetas)
             .setFechaFinalizacion(fechaFin)
         })
-        this.lista.agregarAListas(tarea);
+        this.lista.agregarALista(tarea);
 
       });
 
