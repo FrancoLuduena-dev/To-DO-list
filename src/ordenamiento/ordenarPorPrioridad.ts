@@ -16,7 +16,7 @@ class ordenarPorPrioridad implements ordenamiento {
      * @param ascendente - Indica si el orden debe ser ascendente ("true") o descendente ("false").
      * @returns Un nuevo arreglo de "Tarea" ordenado por prioridad.
      */
-    ordenar(tarea: Tarea[], ascendente: boolean): Tarea[] {
+     public ordenar(tarea: Tarea[], ascendente: boolean): Tarea[] {
         return tarea.sort((a, b) => {
             const prioridadA = a.getPrioridad();  
             const prioridadB = b.getPrioridad();

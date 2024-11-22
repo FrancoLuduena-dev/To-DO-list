@@ -6,6 +6,7 @@ import Tarea from "./tarea";
  * Clase que representa una lista de tareas.
  */
 class ToDoLista {
+ 
     /**
      * @type {Tarea[]} La lista general de tareas.
      */
@@ -31,20 +32,6 @@ class ToDoLista {
             this.listaTareasCompletadas.push(tarea);
         } else {
             this.listaTareasPendientes.push(tarea);
-        }
-    }
-
-    /**
-     * Agrega cambia de lista una tarea de la lista de completadas a la de pendientes y viceversa.
-     * @param {Tarea} tarea - La tarea que se va a agregar a la lista.
-     */
-    public cambiarDeListas(tarea: Tarea): void {
-        if (tarea.getCompletado()) {
-            this.listaTareasCompletadas.push(tarea);
-            this.listaTareasPendientes.splice(this.listaTareasPendientes.indexOf(tarea), 1);
-        } else {
-            this.listaTareasPendientes.push(tarea);
-            this.listaTareasCompletadas.splice(this.listaTareasCompletadas.indexOf(tarea), 1);
         }
     }
 
@@ -89,9 +76,11 @@ class ToDoLista {
             if (!tarea) {
                 throw new TareaInexistenteError(`la tarea con el título \"${titulo}\" no se encuentra en la lista`);
             }
-            this.borrarDeListas(tarea);
+            return this.borrarDeListas(tarea);
         } catch (error) {
             if (error instanceof TareaInexistenteError) {
+                return error.message;
+            } else {
                 return error.message;
             }
         }
@@ -139,10 +128,31 @@ class ToDoLista {
         return this.listaTareas.find(tarea => tarea.getTitulo() === titulo);
     }
 
+    /**
+     *  setea la lista de tareas
+     * @param listaTareas la lista de tareas que se va a setear
+     */
     public setListaTareas(listaTareas: Tarea[]): void {
         this.listaTareas = listaTareas;
+        this.setListaTareasCompletadas();
+        this.setListaTareasPendientes();
     }
 
+    /**
+     * setea la lista de tareas completadas
+     */ 
+    public setListaTareasCompletadas(): void{
+        this.listaTareasCompletadas.length = 0;
+        this.listaTareasCompletadas = this.listaTareas.filter(tarea => tarea.getCompletado());
+    }
+
+    /**
+     * setea la lista de tareas pendientes
+     */ 
+    public setListaTareasPendientes(): void{
+        this.listaTareasPendientes.length = 0;
+        this.listaTareasPendientes = this.listaTareas.filter(tarea => tarea.getCompletado());
+    }
 }
 
 export { ToDoLista };

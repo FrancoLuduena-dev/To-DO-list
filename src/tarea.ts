@@ -216,6 +216,8 @@ class Tarea {
         if (this.completado && this.porcentajeAvance !== 100) {
             this.setPorcentajeAvance(100);
             this.setFechaFinalizacion(new Date());
+        } else {
+            this.setFechaFinalizacion(null);
         }
     }
 
@@ -228,6 +230,8 @@ class Tarea {
         if (this.porcentajeAvance === 100 && !this.completado) {
             this.setCompletado(true);
             this.setFechaFinalizacion(new Date());
+        } else {
+            this.setFechaFinalizacion(null);
         }
     }
 

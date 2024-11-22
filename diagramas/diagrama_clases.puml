@@ -54,7 +54,6 @@ class Director #TECHNOLOGY;header:444 {
 
 class ModificadorTarea #TECHNOLOGY;header:444{
     - tarea: Tarea
-    + ModificadorTarea(tarea: Tarea)
     + setTarea(tareaAModificar: Tarea): this
     + setTitulo(titulo: string): this
     + setDescripcion(descripcion: string): this
@@ -87,7 +86,6 @@ class ToDoLista #TECHNOLOGY;header:444 {
     - listaTareasCompletadas: Tarea[];
     - listaTareasPendientes: Tarea[];
     + agregarAListas(tarea: Tarea): void;
-    + cambiarDeListas(tarea: Tarea): void;
     + borrarDeListas(titulo: string): void;
     + borrarPorTitulo(titulo: string): void;
     + getTareaDeLista(titulo: string): Tarea | undefined;
@@ -96,21 +94,28 @@ class ToDoLista #TECHNOLOGY;header:444 {
     + getTareasPendientes(): Tarea[];
     + getTarea(titulo: string): Tarea;
     + setListaTareas(listaTareas: Tarea[]): void;
+    + setListaTareasCompletadas(): void;
+    + setListaTareasPendientes(): void;
 }
 
-class Busqueda #TECHNOLOGY;header:444 {
-    + busquedaPorTitulo(tareas: Tarea[], titulo: string): Tarea[];
-    + busquedaPorFecha(tareas: Tarea[], fecha: Date): Tarea[];
-    + busquedaPorPrioridad(tareas: Tarea[], prioridad: prioridad): Tarea[];
-    + busquedaPorCategoria(tareas: Tarea[], categoria: categoria): Tarea[];
-    + busquedaPorEtiqueta(tareas: Tarea[], etiqueta: string): Tarea[];
+interface Busqueda #Thistle;header:444{
+    buscar(tareas: Tarea[], parametro: any): Tarea[];
 }
-class Ordenamiento #TECHNOLOGY;header:444 {
-    + ordenarPorTitulo(listaDesordenada: Tarea[], ascendiente: boolean): Tarea[];
-    + ordenarPorFecha(listaDesordenada: Tarea[], ascendiente: boolean): Tarea[];
-    + ordenarPorPrioridad(listaDesordenada: Tarea[], ascendiente: boolean): Tarea[];
-    + ordenarPorEtiquietas(listaDesordenada: Tarea[], ascendiente: boolean): Tarea[];
+
+class BusquedaPorEtiqueta #TECHNOLOGY;header:444 implements Busqueda{
+    + buscar(tareas: Tarea[], etiqueta: string): Tarea[];
 }
+
+class BusquedaPorTitulo #TECHNOLOGY;header:444 implements Busqueda{
+    + buscar(tareas: Tarea[], titulo: string): Tarea[];
+}
+
+
+class BusquedaPorVencimiento #TECHNOLOGY;header:444 implements Busqueda{
+    + buscar(tareas: Tarea[], fecha: Date): Tarea[];
+}
+
+
 class CalculadoraEstadistica #TECHNOLOGY;header:444 {
     - numeroTareasCompletadas: number;
     - numeroTareasTotales: number;
@@ -123,12 +128,37 @@ class Persistencia #TECHNOLOGY;header:444 {
     + constructorTarea: ConstructorTarea;
     + lista: ToDoLista;
     + director: Director;
-    + static async obtenerBaseDeDatos(): Promise<Tarea[]>;
-    + static async guardarBaseDeDatos(data: string): Promise<void>;
+    + async obtenerBaseDeDatos(): void;
+    + async guardarBaseDeDatos(data: string): void ;
 }
+
+interface Ordenamiento #Thistle;header:444{
+    ordenar(tarea: Tarea[], ascendente: boolean): Tarea[];
+}
+
+class OrdenPorEtiquetas #TECHNOLOGY;header:444 implements Ordenamiento {
+    + ordenar(tarea: Tarea[], ascendente: boolean): Tarea[]
+}
+
+class OrdenPorFecha #TECHNOLOGY;header:444 implements Ordenamiento{
+    + ordenar(tarea: Tarea[], ascendente: boolean): Tarea[]
+}
+
+class OrdenPorPrioridad #TECHNOLOGY;header:444 implements Ordenamiento{
+    + ordenar(tarea: Tarea[], ascendente: boolean): Tarea[]
+}
+
+
+class OrdenPorTitulo #TECHNOLOGY;header:444 implements Ordenamiento{
+    + ordenar(tarea: Tarea[], ascendente: boolean): Tarea[]
+}
+
 exception tareaInexistenteError #LightCoral;header:444{}
 
 exception EtiquetaInexistenteError #LightCoral;header:444{}
+
+
+
 'relaciones
     skinparam ranksep 100
 'cambia el largo de las flechas

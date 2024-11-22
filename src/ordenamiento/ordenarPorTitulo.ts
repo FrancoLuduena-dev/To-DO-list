@@ -13,7 +13,7 @@ class ordenarPorTitulo implements ordenamiento {
      * @param ascendente - Indica si el orden debe ser ascendente ("true") o descendente ("false").
      * @returns Un nuevo arreglo de "Tarea" ordenado por título.
      */
-    ordenar(tarea: Tarea[], ascendente: boolean): Tarea[] {
+    public ordenar(tarea: Tarea[], ascendente: boolean): Tarea[] {
         return tarea.sort((a, b) => {
             const tituloA = a.getTitulo();
             const tituloB = b.getTitulo();
