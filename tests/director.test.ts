@@ -48,9 +48,9 @@ describe('Director', () => {
         };
 
         const tarea = director.construirTarea(configurar);
-        mockLista.agregarAListas(tarea);
+        mockLista.agregarALista(tarea);
         expect(mockBuilder.construirTarea).toHaveBeenCalled();
-        expect(mockLista.agregarAListas).toHaveBeenCalledWith(tarea);
+        expect(mockLista.agregarALista).toHaveBeenCalledWith(tarea);
         expect(mockBuilder.reset).toHaveBeenCalled();
         expect(tarea).toBe(mockTarea);
     });
